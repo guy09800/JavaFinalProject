@@ -1,5 +1,5 @@
 package dataStruct;
-import ruppinLand.Person;
+import personClass.Person;
 
 public class PersonTree {
 	TreeNode root;

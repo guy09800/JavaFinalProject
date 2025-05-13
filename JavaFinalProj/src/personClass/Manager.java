@@ -1,4 +1,4 @@
-package Person;
+package personClass;
 
 import java.util.LinkedList;
 import java.util.Calendar;

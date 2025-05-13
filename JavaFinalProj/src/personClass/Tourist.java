@@ -1,4 +1,4 @@
-package Person;
+package personClass;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
