@@ -1,5 +1,5 @@
 package dataStruct;
-sss
+ssss
 import ruppinLand.Person;
 
 public class TreeNode {
