@@ -8,7 +8,7 @@ public class PersonTree {
 		this.root = null;
 	}
 
-	public void addPerson(P person) {
+	public void addPerson(Person person) {
 		if (person == null) {
 			throw new IllegalArgumentException("Person cannot be null");
 		}
@@ -22,13 +22,13 @@ public class PersonTree {
 		if (current == null) {
 			return;
 		}
-		if (person.getId() < current.getPerson().getId()) {
+		if (person.getIdAsNum() < current.getPerson().getIdAsNum()) {
 			if (current.getLeft() == null) {
 				current.setLeft(new TreeNode(person));
 			} else {
 				addPersonRec(current.getLeft(), person);
 			}
-		} else if (person.getId() > current.getPerson().getId()) {
+		} else if (person.getIdAsNum() > current.getPerson().getIdAsNum()) {
 			if (current.getRight() == null) {
 				current.setRight(new TreeNode(person));
 			} else {
@@ -47,9 +47,9 @@ public class PersonTree {
 		if (current == null) {
 			return null;
 		}
-		if (id == current.getPerson().getId()) {
+		if (id == current.getPerson().getIdAsNum()) {
 			return current.getPerson();
-		} else if (id < current.getPerson().getId()) {
+		} else if (id < current.getPerson().getIdAsNum()) {
 			return searchPersonRec(current.getLeft(), id);
 		} else {
 			return searchPersonRec(current.getRight(), id);

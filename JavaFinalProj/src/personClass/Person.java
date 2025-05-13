@@ -8,6 +8,7 @@ public abstract class Person {
 	private String id;
 	private String name;
 	private GregorianCalendar  birthday;
+	private int height;
 	
 	//default constructor
 	public Person() {
@@ -24,6 +25,7 @@ public abstract class Person {
 	}
 	 //getters and setters
 	 public String getId() {return id; }
+	 public int getIdAsNum() {return Integer.valueOf(id); }
 	 public void setId(String id) {this.id = id;}
 
 	 public String getName() {return name;}
@@ -41,6 +43,24 @@ public abstract class Person {
 		return "ID: " + id + "\nName: " + name + "\nBirthday: " + birthday.get(Calendar.DAY_OF_MONTH) + "/"
 				+ (birthday.get(Calendar.MONTH) + 1) + "/" + birthday.get(Calendar.YEAR);
 		}
+	 public int getAge() {
+		 GregorianCalendar today = new GregorianCalendar();
+		 int age = today.get(Calendar.YEAR) - birthday.get(Calendar.YEAR);
+			if (today.get(Calendar.MONTH) < birthday.get(Calendar.MONTH)
+					|| (today.get(Calendar.MONTH) == birthday.get(Calendar.MONTH)
+							&& today.get(Calendar.DAY_OF_MONTH) < birthday.get(Calendar.DAY_OF_MONTH))) {
+				age--;
+			}
+		return age;
+			            
+	 }
+	 public int getHight() {return height;}
+	 public void setHight(int height) {
+			if (height < 0) {
+				throw new IllegalArgumentException("Height cannot be negative");
+			}
+			this.height = height;
+	 }
 
 	
 	
