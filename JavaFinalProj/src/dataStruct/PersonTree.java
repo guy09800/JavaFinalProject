@@ -8,7 +8,7 @@ public class PersonTree {
 		this.root = null;
 	}
 
-	public void addPerson(Person person) {
+	public void addPerson(P person) {
 		if (person == null) {
 			throw new IllegalArgumentException("Person cannot be null");
 		}

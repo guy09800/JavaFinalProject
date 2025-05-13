@@ -1,6 +1,6 @@
 package dataStruct;
-//idan lin
-import ruppinLand.Person;
+
+import personClass.Person;
 
 public class TreeNode {
 	Person person;
