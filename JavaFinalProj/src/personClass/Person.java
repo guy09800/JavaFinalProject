@@ -1,5 +1,4 @@
 package personClass;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -7,7 +6,7 @@ public abstract class Person {
 // fields id name of birthday
 	private String id;
 	private String name;
-	private GregorianCalendar  birthday;
+	private GregorianCalendar birthday;
 	private int height;
 	
 	//default constructor
@@ -23,19 +22,28 @@ public abstract class Person {
 		this.name = name;
 		this.birthday = birthday;
 	}
+	 //copy constructor
+	 public Person(Person other) {
+			if (other == null) {
+				throw new IllegalArgumentException("Cannot copy from a null Person.");
+			}
+			this.id = other.id;
+			this.name = other.name;
+			this.birthday = new GregorianCalendar();
+			this.birthday.setTime(other.birthday.getTime());
+			this.height = other.height;
+	 }
 	 //getters and setters
 	 public String getId() {return id; }
 	 public int getIdAsNum() {return Integer.valueOf(id); }
 	 public void setId(String id) {this.id = id;}
-
 	 public String getName() {return name;}
 	 public void setName(String name) {this.name = name;}
-
 	 public GregorianCalendar getBirthday() {return birthday;}
-	 public void setBirthday(GregorianCalendar birthday) 
-		{this.birthday = birthday;}
+	 public void setBirthday(GregorianCalendar birthday) {this.birthday = birthday;}
 	 
 	 public abstract void printDetails();
+	 public abstract void printDetailsOneLine();
 
 	 //toString method- to print the details of the person
 	 @Override
@@ -61,7 +69,5 @@ public abstract class Person {
 			}
 			this.height = height;
 	 }
-
-	
 	
 }

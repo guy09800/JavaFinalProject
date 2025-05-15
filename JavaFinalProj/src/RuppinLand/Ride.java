@@ -5,7 +5,7 @@ import java.util.Queue;
 
 import personClass.Person;
 
-public abstract class Ride implements Attraction {
+public abstract class Ride{
 	String name;
 	int minAge;
 	int minHeight;

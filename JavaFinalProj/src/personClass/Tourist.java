@@ -1,36 +1,33 @@
 package personClass;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Stack; 
+import java.util.Stack;
+import RuppinLand.*;
 
 public class Tourist extends Person {
-	// fields: height visit stack
 	private double height;
-	private Stack<GregorianCalendar> visitStack;
+	private Stack<Ticket> visitStack;
 	
 	// default constructor
 	public Tourist() {
 		super();
 		this.height = 0.0;
-		this.visitStack = new Stack<GregorianCalendar>();
+		this.visitStack = new Stack<Ticket>();
 	}
 	
 	// constructor with parameters
 	public Tourist(String id, String name, GregorianCalendar birthday, double height) {
 		super(id, name, birthday);
 		this.height = height;
-		this.visitStack = new Stack<GregorianCalendar>();
+		this.visitStack = new Stack<Ticket>();
 	}
 	
 	// getters and setters
 	public double getHeight() {return height;}
 	public void setHeight(double height) {this.height = height;}
 	
-	public Stack<GregorianCalendar> getVisitStack() {return visitStack;}
-	public void setVisitStack(Stack<GregorianCalendar> visitStack) {this.visitStack = visitStack;}
-	
-
+	public Stack<Ticket> getVisitStack() {return visitStack;}
+	public void setVisitStack(Stack<Ticket> visitStack) {this.visitStack = visitStack;}
 	
 	// Override of the abstract method from Person –
 	// prints tourist-specific details to the console
@@ -44,6 +41,14 @@ public class Tourist extends Person {
 	public void printDetails() {
 		System.out.println(this.toString());
 	}
+
+	public void printDetailsOneLine() {
+		// Print all tourist details in a single line
+		System.out.println("Tourist: " + getName() + ", ID: " + getId() + ", BirthDay: "
+				+ getBirthday().get(Calendar.DAY_OF_MONTH) + "/" + (getBirthday().get(Calendar.MONTH) + 1) + "/"
+				+ getBirthday().get(Calendar.YEAR) + ", Height: " + height + ", Age: " + getAge());
+	}
+	
 	
 	// method to check if the tourist is lowest than a given height
 	public boolean isLowerThan(double height) {return this.height < height;}
@@ -56,11 +61,11 @@ public class Tourist extends Person {
 	public boolean isVisitStackEmpty() {return visitStack.isEmpty();}
 	
 	// method to add a visit to the stack
-	public void addVisit(GregorianCalendar date) {visitStack.push(date);}
+	public void addVisit(Ticket ticket) {visitStack.push(ticket);}
 	
 	
 	// method to remove a visit from the stack
-	public GregorianCalendar removeVisit() {
+	public Ticket removeVisit() {
 		if (!visitStack.isEmpty()) 
 			return visitStack.pop();
 		 else {
@@ -70,7 +75,7 @@ public class Tourist extends Person {
 	}
 	
 	// method to get the last visit
-	public GregorianCalendar getLastVisit() {
+	public Ticket getLastVisit() {
 		if (!visitStack.isEmpty()) 
 			return visitStack.peek();
 		 else {
@@ -79,7 +84,7 @@ public class Tourist extends Person {
 		}
 	}
 	// method to get the first visit
-	public GregorianCalendar getFirstVisit() {
+	public Ticket getFirstVisit() {
 		if (!visitStack.isEmpty())
 			return visitStack.firstElement();
 		else {
@@ -98,7 +103,7 @@ public class Tourist extends Person {
 	public void printAllVisits() {
 		if (!visitStack.isEmpty()) {
 			System.out.println("Visits:");
-			for (GregorianCalendar visit : visitStack) {
+			for (Ticket visit : visitStack) {
 				System.out.println(visit);
 			}
 		} else {
@@ -118,18 +123,13 @@ public class Tourist extends Person {
 	    StringBuilder sb = new StringBuilder("Visits:\n");
 
 	    // Loop through each visit in the stack (from bottom to top)
-	    for (GregorianCalendar visit : visitStack) 
+	    for (Ticket visit : visitStack) 
 	        // Append each visit's date in readable format with a bullet point
-            sb.append("- ").append(visit.getTime()).append("\n");
+            sb.append("- ").append(visit.getBuyDateTime()).append("\n");
 		    
 
 	  // Return the complete formatted visit list as a string
 	   return sb.toString();
 		}
-
-	
-	
-	
-
 
 }

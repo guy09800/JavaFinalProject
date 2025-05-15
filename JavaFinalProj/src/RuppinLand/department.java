@@ -1,0 +1,13 @@
+package RuppinLand;
+import personClass.*;
+
+public interface department {
+	public void setName(String name);
+	public String getName();
+	public void menu();
+	public void printDetails();
+	public void printDetailsOneLine();
+	public void handleCoustomer(Tourist tourist);
+	public void closeRide();
+	public void openRide();
+}

@@ -41,6 +41,12 @@ public class Employee extends Person {
 	public void printDetails() {
 	    System.out.println(this.toString());
 	}
+	public void printDetailsOneLine()
+	{
+		System.out.println("Employee: " + getName() + ", ID: " + getId() + ", BirthDay: "
+				+ getBirthday().get(Calendar.DAY_OF_MONTH) + "/" + (getBirthday().get(Calendar.MONTH) + 1) + "/"
+				+ getBirthday().get(Calendar.YEAR) + ", Role: " + role + ", Salary: " + salary);
+    }
 
 	
 

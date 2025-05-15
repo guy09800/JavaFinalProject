@@ -55,4 +55,16 @@ public class PersonTree {
 			return searchPersonRec(current.getRight(), id);
 		}
 	}
+
+	public void printAll() {
+		printAllPerson(root);
+	}
+
+	private void printAllPerson(TreeNode node) {
+		if (node != null) {
+			printAllPerson(node.getLeft());
+			node.getPerson().printDetailsOneLine();
+			printAllPerson(node.getRight());
+		}
+	}
 }
