@@ -13,6 +13,7 @@ public abstract class Ride{
 	int currentCapacity;
 	Queue<Person> queue;
 	Date nextMaintenanceTime;
+	boolean isOpen;
 	
 	
 	public void setName(String name) {
