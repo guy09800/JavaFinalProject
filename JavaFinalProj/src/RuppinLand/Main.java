@@ -17,9 +17,7 @@ public class Main {
     private PersonTree employeeTree;
     private PersonTree visitorsTree;
     private LinkedList<Ride> attractions;
-    private Stack<Ticket> tickets;
-    private Queue<Person> entryQueue;
-    //private List<Department> departments;
+    private List<Object> departments;
     private boolean isOpen;
     private static Scanner scanner = new Scanner(System.in);
     
@@ -27,15 +25,13 @@ public class Main {
 		this.employeeTree = new PersonTree();
 		this.visitorsTree = new PersonTree();
 		this.attractions = new LinkedList<>();
-		this.tickets = new Stack<>();
-		this.entryQueue = new LinkedList<>();
-		//this.departments = new LinkedList<>();
+		this.departments = new LinkedList<>();
 		this.isOpen = false;
 	}
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Ruppin Land!");
-		//create new 10 Tourist and 10 employee
+		// create new 10 tourist
 		Main main = new Main();
 		Tourist t1 = new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75);
 		Tourist t2 = new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 1.80);
@@ -60,16 +56,16 @@ public class Main {
 		main.visitorsTree.addPerson(t10);
 		
 		// create 10 employees
-		Employee e1 = new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Manager", 100);
-		Employee e2 = new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Cashier", 80);
-		Employee e3 = new Employee("13", "Mallory", new GregorianCalendar(1980, 3, 3), "Guide", 90);
-		Employee e4 = new Employee("14", "Nina", new GregorianCalendar(1975, 4, 4), "Security", 70);
-		Employee e5 = new Employee("15", "Oscar", new GregorianCalendar(1970, 5, 5), "Maintenance", 60);
-		Employee e6 = new Employee("16", "Peggy", new GregorianCalendar(1965, 6, 6), "Guide", 85);
-		Employee e7 = new Employee("17", "Quentin", new GregorianCalendar(1960, 7, 7), "Cashier", 75);
-		Employee e8 = new Employee("18", "Rupert", new GregorianCalendar(1955, 8, 8), "Manager", 110);
-		Employee e9 = new Employee("19", "Sybil", new GregorianCalendar(1950, 9, 9), "Security", 65);
-		Employee e10 = new Employee("20", "Trent", new GregorianCalendar(1945, 10, 10), "Maintenance", 55);
+		Employee e1 = new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Managment", 100);
+		Employee e2 = new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Reception", 80);
+		Employee e3 = new Employee("13", "Mallory", new GregorianCalendar(1980, 3, 3), "Reception", 90);
+		Employee e4 = new Employee("14", "Nina", new GregorianCalendar(1975, 4, 4), "Technician", 70);
+		Employee e5 = new Employee("15", "Oscar", new GregorianCalendar(1970, 5, 5), "Operator", 60);
+		Employee e6 = new Employee("16", "Peggy", new GregorianCalendar(1965, 6, 6), "Operator", 85);
+		Employee e7 = new Employee("17", "Quentin", new GregorianCalendar(1960, 7, 7), "Operator", 75);
+		Employee e8 = new Employee("18", "Rupert", new GregorianCalendar(1955, 8, 8), "Managment", 110);
+		Employee e9 = new Employee("19", "Sybil", new GregorianCalendar(1950, 9, 9), "Technician", 65);
+		Employee e10 = new Employee("20", "Trent", new GregorianCalendar(1945, 10, 10), "Reception", 55);
 		// add employees to the tree
 		main.employeeTree.addPerson(e1);
 		main.employeeTree.addPerson(e2);
@@ -107,8 +103,8 @@ public class Main {
 			Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(id));
 			if (employee != null) {
 				switch (employee.getRole()) {
-                    case "Manager":
-                        managerMenu(employee);
+                    case "Managment":
+                    	managmentMenu(employee);
                         break;
                     case "Technician":
                         technicianMenu(employee);
@@ -127,7 +123,7 @@ public class Main {
 			}
 		}
 	}
-	public void managerMenu(Employee employee) {
+	public void managmentMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
 			break;
