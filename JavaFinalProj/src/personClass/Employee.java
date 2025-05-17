@@ -18,7 +18,7 @@ public class Employee extends Person {
 	// constructor with parameters
 	public Employee(String id, String name, GregorianCalendar birthday,String role , double salary) {
 		super(id, name, birthday);
-		this.role = role1;
+		this.role = role;
 		this.salary = salary;
 	}
 
