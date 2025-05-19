@@ -2,13 +2,14 @@ package RuppinLand;
 
 import personClass.Tourist;
 
-public class Managment implements department {
+public class Management implements department {
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
+private String name;
 
-	}
+
+public Management(String name) {
+    this.name=name;
+}
 
 	@Override
 	public String getName() {

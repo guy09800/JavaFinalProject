@@ -2,7 +2,6 @@ package RuppinLand;
 import personClass.*;
 
 public interface department {
-	public void setName(String name);
 	public String getName();
 	public void menu();
 	public void printDetails();

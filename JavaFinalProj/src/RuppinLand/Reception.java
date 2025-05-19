@@ -4,10 +4,10 @@ import personClass.Tourist;
 
 public class Reception implements department {
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
+	private String name;
 
+	public Reception(String name) {
+	    this.name=name;
 	}
 
 	@Override

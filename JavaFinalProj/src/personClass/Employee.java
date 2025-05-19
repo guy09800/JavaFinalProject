@@ -5,20 +5,20 @@ import java.util.GregorianCalendar;
 
 public class Employee extends Person {
 	// fields: id, name, birthday, salary
-	private String role;
+	private String department;
 	private double salary;
 
 	// default constructor
 	public Employee() {
 		super();
-		this.role = "";
+		this.department = "";
 		this.salary = 0.0;
 	}
 
 	// constructor with parameters
-	public Employee(String id, String name, GregorianCalendar birthday,String role , double salary) {
+	public Employee(String id, String name, GregorianCalendar birthday,String department , double salary) {
 		super(id, name, birthday);
-		this.role = role;
+		this.department = department;
 		this.salary = salary;
 	}
 
@@ -26,15 +26,15 @@ public class Employee extends Person {
 	public double getSalary() {return salary;}
 	public void setSalary(double salary) {this.salary = salary;	}
 
-	public String getRole() {return role;}
-	public void setRole(String role) {this.role = role;}
+	public String getdepartment() {return department;}
+	public void setdepartment(String department) {this.department = department;}
 	
 	// Override of the abstract method from Person – 
 	// prints employee-specific details to the console
 	// Override of the toString method to include employee-specific details
 	@Override
 	public String toString() {
-		return "Employee:\n" + super.toString() + "\nRole: " + role + "\nSalary: " + salary;
+		return "Employee:\n" + super.toString() + "\ndepartment: " + department + "\nSalary: " + salary;
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Employee extends Person {
 	{
 		System.out.println("Employee: " + getName() + ", ID: " + getId() + ", BirthDay: "
 				+ getBirthday().get(Calendar.DAY_OF_MONTH) + "/" + (getBirthday().get(Calendar.MONTH) + 1) + "/"
-				+ getBirthday().get(Calendar.YEAR) + ", Role: " + role + ", Salary: " + salary);
+				+ getBirthday().get(Calendar.YEAR) + ", department: " + department + ", Salary: " + salary);
     }
 
 	

@@ -4,11 +4,13 @@ import personClass.Tourist;
 
 public class Operator implements department {
 
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-
+	private String name;
+	
+	
+	public Operator(String name) {
+	    this.name=name;
 	}
+
 
 	@Override
 	public String getName() {

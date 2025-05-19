@@ -10,11 +10,6 @@ public class Technician implements department {
         this.name=name;
     }
     
-	@Override
-	public void setName(String name) {
-		// TODO Auto-generated method stub
-		this.name = name;
-	}
 
 	@Override
 	public String getName() {
