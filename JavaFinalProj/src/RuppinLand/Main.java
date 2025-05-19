@@ -135,7 +135,76 @@ public class Main {
 	public void technicianMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
-			break;
+			System.out.println("Please enter the ride name:");
+			//print all attractions names
+			for (Ride ride : attractions) {
+				System.out.println(ride.getName());
+			}
+			String rideName = scanner.nextLine();
+			Ride ride = null;
+			for (Ride r : attractions) {
+				if (r.getName().equals(rideName)) {
+					ride = r;
+					break;
+				}
+			}
+			if (ride == null) {
+				System.out.println("Ride not found.");
+				continue;
+			}
+			while(true)
+			{
+				System.out.println("1. Open ride	4. Get ride details");
+				System.out.println("2. Close ride	5. Get complaint from tourist");
+				System.out.println("3. Fix ride    6. Exit");
+                int choice = scanner.nextInt();
+                scanner.nextLine();
+				switch (choice) {
+				case 1:
+					ride.setOpen(true);
+					System.out.println("Ride " + ride.getName() + " is now open.");
+					break;
+				case 2:
+					ride.setOpen(false);
+					System.out.println("Ride " + ride.getName() + " is now closed.");
+					break;
+				case 3:
+					//get from user next maintenance time
+					System.out.println("Please enter the next maintenance time (yyyy-mm-dd):");
+					String date = scanner.nextLine();
+					String[] dateParts = date.split("-");
+					int year = Integer.parseInt(dateParts[0]);
+					int month = Integer.parseInt(dateParts[1]) - 1; // Month is 0-based in GregorianCalendar
+					int day = Integer.parseInt(dateParts[2]);
+					GregorianCalendar nextMaintenanceTime = new GregorianCalendar(year, month, day);
+					ride.setNextMaintenanceTime(nextMaintenanceTime);
+					System.out.println("Ride " + ride.getName() + " is under maintenance.");
+					break;
+				case 4:
+					ride.printDetails();
+					break;
+				case 5:
+					System.out.println("what is the complaint?");
+                    String complaint = scanner.nextLine();
+                    System.out.println("choose if the to close the ride or not");
+                    System.out.println("1. yes	2. no");
+                    int choice2 = scanner.nextInt();
+                    scanner.nextLine();
+					if (choice2 == 1) {
+						ride.setOpen(false);
+						System.out.println("Ride " + ride.getName() + " is now closed.");
+					} else if (choice2 == 2) {
+						System.out.println("Ride " + ride.getName() + " is still open.");
+					} else {
+						System.out.println("Invalid choice.");
+			        }
+					break;
+				case 6:
+					return;
+				default:
+					System.out.println("Invalid choice.");
+				}
+			}
 		}
 	}
 	public void operatorMenu(Employee employee) {

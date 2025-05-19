@@ -3,8 +3,13 @@ package RuppinLand;
 import personClass.Tourist;
 
 public class Technician implements department {
-
+	
 	private String name;
+
+    public Technician(String name) {
+        this.name=name;
+    }
+    
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
