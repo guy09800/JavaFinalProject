@@ -6,7 +6,7 @@ public class Reception implements department {
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub1
+		// TODO Auto-generated method stub
 
 	}
 
