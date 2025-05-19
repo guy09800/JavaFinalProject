@@ -1,5 +1,6 @@
 package RuppinLand;
 import java.security.PublicKey;
+import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -223,7 +224,94 @@ public class Main {
 	public void operatorMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
-			break;
+			System.out.println("Please enter the ride name:");
+			//print all attractions names
+			for (Ride ride : attractions) {
+				System.out.println(ride.getName());
+			}
+			String rideName = scanner.nextLine();
+			Ride ride = null;
+			for (Ride r : attractions) {
+				if (r.getName().equals(rideName)) {
+					ride = r;
+					break;
+				}
+			}
+			if (ride == null) {
+				System.out.println("Ride not found.");
+				continue;
+			}
+			while(true)
+			{
+				//print the menu 1.sell ticket 2. move the queue 3. get person from the queue 4. close ride 5. open ride 6. get ride details 7. exit
+				System.out.println("1. Sell ticket	5. Open ride");
+				System.out.println("2. Move the queue	6. Get ride details");
+				System.out.println("3. Get person from the queue	7. Exit");
+				System.out.println("4. Close ride");
+				int choice = scanner.nextInt();
+				scanner.nextLine();
+				switch (choice) {
+				case 1:
+					//get from user the tourist id
+					System.out.println("Please enter the tourist id:");
+					String touristId = scanner.nextLine();
+					Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
+					if (tourist == null) {
+						System.out.println("Tourist not found.");
+						continue;
+					}
+					//check if the tourist is in the queue
+					if (ride.getQueue().contains(tourist)) {
+						System.out.println("Tourist " + tourist.getName() + " is already in the queue.");
+						continue;
+					}
+					//check if the ride is open
+					if (!ride.isOpen()) {
+						System.out.println("Ride " + ride.getName() + " is closed.");
+						continue;
+					}
+					//check if the tourist is old enough
+					if (tourist.getAge() < ride.getMinAge()) {
+						System.out.println(
+								"Tourist " + tourist.getName() + " is not old enough for ride " + ride.getName() + ".");
+						continue;
+					}
+					//check if the tourist is tall enough
+					if (tourist.getHeight() < ride.getMinHeight()) {
+						System.out.println("Tourist " + tourist.getName() + " is not tall enough for ride "
+								+ ride.getName() + ".");
+						continue;
+					}
+					//check if the ride is full
+					if (ride.getCurrentCapacity() >= ride.getMaxCapacity()) {
+						System.out.println("Ride " + ride.getName() + " is full.");
+						continue;
+					}
+					//add the tourist to the queue
+					//sell the ticket
+					tourist.addVisit(new Ticket(tourist.getId(), tourist.getName(), ride.getName(), ride.getPrice(),LocalDateTime.now(), null));
+					ride.getQueue().add(tourist);
+					ride.setCurrentCapacity(ride.getCurrentCapacity() + 1);
+					System.out.println("Tourist " + tourist.getName() + " has been added to the queue for ride "
+							+ ride.getName() + ".");
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					break;
+				case 6:
+					break;
+				case 7:
+					return;
+				default:
+					System.out.println("Invalid choice.");
+					break;
+				}
+			}
 		}
 	}
 	public void receptionMenu(Employee employee) {

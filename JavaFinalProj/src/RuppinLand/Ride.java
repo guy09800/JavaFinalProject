@@ -12,6 +12,7 @@ public abstract class Ride{
 	int minHeight;
 	int maxCapacity;
 	int currentCapacity;
+	int price;
 	Queue<Person> queue;
 	GregorianCalendar nextMaintenanceTime;
 	boolean isOpen;
@@ -110,6 +111,17 @@ public abstract class Ride{
 	
 	public void setOpen(boolean isOpen) {
 		this.isOpen = isOpen;
+	}
+	
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		if (price < 0) {
+			throw new IllegalArgumentException("Price cannot be negative");
+		}
+		this.price = price;
 	}
 	
 }

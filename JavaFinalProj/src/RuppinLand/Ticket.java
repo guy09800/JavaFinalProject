@@ -2,13 +2,12 @@ package RuppinLand;
 import java.time.LocalDateTime;
 import personClass.*;
 import java.time.Duration;
-
 import personClass.Person;
 
 public final class Ticket { // Final Class unless we want to inherit from this class.
     
-    private int id;
-    private Person person;
+    private String id;
+    private String touristName;
     private String rideName;
     private double price;
     private LocalDateTime buyDateTime;
@@ -16,8 +15,8 @@ public final class Ticket { // Final Class unless we want to inherit from this c
 
     // Constructor :
     
-    public Ticket(int id, Person person, String rideName, double price, LocalDateTime buyDateTime, LocalDateTime playDateTime) {
-        if (person == null) {
+    public Ticket(String id, String touristName, String rideName, double price, LocalDateTime buyDateTime, LocalDateTime playDateTime) {
+        if (touristName == null) {
             throw new IllegalArgumentException("Person cannot be null.");
         }
         if (rideName == null) {
@@ -29,7 +28,7 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         if (price < 0) throw new IllegalArgumentException("Price cannot be negative.");
         
         this.id = id;
-        this.person = person;
+        this.touristName = touristName;
         this.rideName = rideName;
         this.price = price;
         this.buyDateTime = buyDateTime;
@@ -43,7 +42,7 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         }
 
         this.id = other.id;
-        this.person = new Tourist(); // Deep Copy - PERSON CLASS MUST HAVE COPY CTOR!
+        this.touristName = touristName; // Deep Copy - PERSON CLASS MUST HAVE COPY CTOR!
         this.rideName = other.rideName; // Deep Copy - ATTRACTION CLASS MUST HAVE COPY CTOR! 
         this.price = other.price;
         this.buyDateTime = other.buyDateTime;
@@ -58,14 +57,11 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     public boolean isValid() {
         return playDateTime.isAfter(buyDateTime);
     }
-
-    
     // Return how long is it between purchase and play time in minutes : 
     
     public long getDurationBetweenBuyAndPlayMinutes() {
         return Duration.between(buyDateTime, playDateTime).toMinutes();
     }
-    
 
     // Apply Discount (Percentage Based %) : 
     
@@ -80,18 +76,18 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     
     @Override // Annotation for compiler to override Object's toString().
     public String toString() {
-        return "Ticket #" + id + " for " + person.getName() + " to " + rideName + 
+        return "Ticket #" + id + " for " + touristName + " to " + rideName + 
                " | Price: " + price + " | Buy: " + buyDateTime + " | Play: " + playDateTime;
     }
 
     // Getters:
     
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public Person getPerson() {
-        return person;
+    public String getTouristName() {
+        return touristName;
     }
 
     public String getRideName() {
@@ -112,15 +108,15 @@ public final class Ticket { // Final Class unless we want to inherit from this c
 
     // Setters :
     
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setPerson(Person person) {
-        if (person == null) {
-            throw new IllegalArgumentException("Person cannot be null.");
+    public void setTouristName(String touristName) {
+		if (touristName == null) {
+			throw new IllegalArgumentException("Person cannot be null.");
         }
-        this.person = person;
+        	this.touristName = touristName;
     }
 
 	public void setRideName(String rideName) {
