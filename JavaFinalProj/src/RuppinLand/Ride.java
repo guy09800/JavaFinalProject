@@ -93,4 +93,12 @@ public abstract class Ride{
 		return nextMaintenanceTime;
 	}
 	
+	public boolean isOpen() {
+		return isOpen;
+	}
+	
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+	}
+	
 }

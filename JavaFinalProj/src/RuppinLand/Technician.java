@@ -4,22 +4,23 @@ import personClass.Tourist;
 
 public class Technician implements department {
 
+	private String name;
 	@Override
 	public void setName(String name) {
 		// TODO Auto-generated method stub
-
+		this.name = name;
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
 	public void menu() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -37,19 +38,19 @@ public class Technician implements department {
 	@Override
 	public void handleCoustomer(Tourist tourist) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void closeRide() {
+	public void closeRide(Ride ride) {
 		// TODO Auto-generated method stub
-
+		ride.setOpen(false);
 	}
 
 	@Override
-	public void openRide() {
+	public void openRide(Ride ride) {
 		// TODO Auto-generated method stub
-
+		ride.setOpen(true);
 	}
 
 }

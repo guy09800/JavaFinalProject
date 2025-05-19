@@ -41,13 +41,13 @@ public class Managment implements department {
 	}
 
 	@Override
-	public void closeRide() {
+	public void closeRide(Ride ride) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void openRide() {
+	public void openRide(Ride ride) {
 		// TODO Auto-generated method stub
 
 	}

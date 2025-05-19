@@ -31,6 +31,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Ruppin Land!");
+		//create new departments
+		
 		// create new 10 tourist
 		Main main = new Main();
 		Tourist t1 = new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75);

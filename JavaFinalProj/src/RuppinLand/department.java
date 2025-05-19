@@ -8,6 +8,6 @@ public interface department {
 	public void printDetails();
 	public void printDetailsOneLine();
 	public void handleCoustomer(Tourist tourist);
-	public void closeRide();
-	public void openRide();
+	public void closeRide(Ride ride);
+	public void openRide(Ride ride);
 }
