@@ -22,6 +22,9 @@ public class Main {
     private boolean isOpen;
     private static Scanner scanner = new Scanner(System.in);
     
+    
+    // Constructor : 
+    
 	public Main() {
 		this.employeeTree = new PersonTree();
 		this.visitorsTree = new PersonTree();
@@ -30,6 +33,9 @@ public class Main {
 		this.isOpen = false;
 	}
 
+	
+	// Main : 
+	
 	public static void main(String[] args) {
 		
 		Main main = new Main();
@@ -99,13 +105,22 @@ public class Main {
 		//show all the employees
 		System.out.println("Employees:");
 		main.employeeTree.printAll();
+		
+		
+		// Call Main Menu : 
+		
 		main.mainMenu();
 		
-			
 	}
 
+	
+	
+	
+	// Main Menu : 
+	
 	public void mainMenu () {
 		while (true) {
+			
 			System.out.println("Please enter your ID or 0 to exit:");
 			String id = scanner.nextLine();
 			if (id.equals("0")) {
@@ -116,6 +131,7 @@ public class Main {
 					return;
 				} else {continue;}
 			}
+			
 			Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(id));
 			if (employee != null) {
 				switch (employee.getdepartment()) {
@@ -139,6 +155,12 @@ public class Main {
 			}
 		}
 	}
+	
+	
+	
+	// All Types of Menus : 
+	
+	
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
@@ -170,7 +192,9 @@ public class Main {
 			{
 				System.out.println("1. Open ride	4. Get ride details");
 				System.out.println("2. Close ride	5. Get complaint from tourist");
-				System.out.println("3. Fix ride    6. Exit");
+				System.out.println("3. Fix ride    6. Print All Technicians");
+				System.out.println("7. Exit");
+				
                 int choice = scanner.nextInt();
                 scanner.nextLine();
 				switch (choice) {
@@ -198,22 +222,62 @@ public class Main {
 					ride.printDetails();
 					break;
 				case 5:
-					System.out.println("what is the complaint?");
-                    String complaint = scanner.nextLine();
-                    System.out.println("choose if the to close the ride or not");
-                    System.out.println("1. yes	2. no");
-                    int choice2 = scanner.nextInt();
-                    scanner.nextLine();
-					if (choice2 == 1) {
-						ride.setOpen(false);
-						System.out.println("Ride " + ride.getName() + " is now closed.");
-					} else if (choice2 == 2) {
-						System.out.println("Ride " + ride.getName() + " is still open.");
-					} else {
-						System.out.println("Invalid choice.");
-			        }
-					break;
+				    System.out.println("Please enter the tourist ID:");
+				    String touristId = scanner.nextLine();
+				    Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
+				    if (tourist == null) {
+				        System.out.println("Tourist not found.");
+				        break;
+				    }
+				 // Find the Technician instance in the departments list
+				    Technician technician = null;
+				    for (Object obj : departments) {
+				        if (obj instanceof Technician) {
+				            technician = (Technician) obj;
+				            break;
+				        }
+				    }
+
+				    if (technician != null) {
+				        technician.handleCustomer(tourist, ride);
+				    }
+				    else {
+				        System.out.println("Technician department not found.");
+				    }
+				    break;
 				case 6:
+				    // Find the Technician instance in the departments list
+				    Technician sometechnician = null;
+
+				    for (Object obj : departments) {
+				        if (obj instanceof Technician) {
+				            sometechnician = (Technician) obj;
+				            break;
+				        }
+				    }
+
+				    if (sometechnician != null) {
+				    	
+				        System.out.println("Would you like to print in a single line? (Y/N)");
+				        
+				        String YNchoice = scanner.nextLine().trim().toUpperCase();
+				        
+				        if (YNchoice.startsWith("N")) {
+				            sometechnician.printDetails(employeeTree);
+				        } else if (YNchoice.startsWith("Y")) {
+				            sometechnician.printDetailsOneLine(employeeTree);
+				        } else {
+				            System.out.println("Invalid choice. Returning to menu.");
+				        }
+				    }
+				    
+				    else {
+				        System.out.println("Technician department not found.");
+				    }
+				    
+				    break;
+				case 7:
+			        System.out.println("Exiting...");
 					return;
 				default:
 					System.out.println("Invalid choice.");
@@ -221,6 +285,10 @@ public class Main {
 			}
 		}
 	}
+	
+	
+	
+	
 	public void operatorMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {

@@ -1,12 +1,13 @@
 package RuppinLand;
-import personClass.*;
+
+import dataStruct.*;
+import personClass.Tourist;
 
 public interface department {
 	public String getName();
-	public void menu();
-	public void printDetails();
-	public void printDetailsOneLine();
-	public void handleCoustomer(Tourist tourist);
+	public void printDetails(PersonTree employeeTree);
+	public void printDetailsOneLine(PersonTree EmployeeTree);
 	public void closeRide(Ride ride);
 	public void openRide(Ride ride);
+	public void handleCustomer(Tourist tourist, Ride ride);
 }

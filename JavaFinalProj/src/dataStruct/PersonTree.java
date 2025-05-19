@@ -1,4 +1,5 @@
 package dataStruct;
+import personClass.Employee;
 import personClass.Person;
 
 public class PersonTree {
@@ -59,6 +60,45 @@ public class PersonTree {
 	public void printAll() {
 		printAllPerson(root);
 	}
+	
+	
+	public void printByDepartment(String departmentName, boolean OneLine) {
+		
+	    if (departmentName == null || departmentName.isBlank()) {
+	        System.out.println("Invalid department name.");
+	        return;
+	    }
+
+	    System.out.println("Employees in department: " + departmentName);
+	     
+	    printByDepartmentRec(root, departmentName.trim(), OneLine); 
+	}
+	    
+
+	
+	// In-Order Traversal :
+	private void printByDepartmentRec(TreeNode node, String departmentName, boolean OneLine) { 
+	    
+		if (node == null) return;
+
+	    printByDepartmentRec(node.getLeft(), departmentName, OneLine);
+
+	    Employee employee = (Employee) node.getPerson(); // Safe cast since tree has only Employees
+	    
+	    if (employee.getdepartment().equalsIgnoreCase(departmentName)) {
+	    	if (OneLine) {
+	        employee.printDetailsOneLine();
+	    	}
+	    	else if (!OneLine) { 
+	    		employee.printDetails(); 
+	    	}
+	    }
+
+	    printByDepartmentRec(node.getRight(), departmentName, OneLine);
+	}
+
+
+	
 
 	private void printAllPerson(TreeNode node) {
 		if (node != null) {
@@ -67,4 +107,11 @@ public class PersonTree {
 			printAllPerson(node.getRight());
 		}
 	}
+
+
+public TreeNode getRoot() {
+    return root;
 }
+
+}
+
