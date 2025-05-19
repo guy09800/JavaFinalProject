@@ -33,7 +33,7 @@ public class Main {
 		System.out.println("Welcome to Ruppin Land!");
 		//create new departments
 		
-		// create new 10 tourist
+		// create new 10 tourists
 		Main main = new Main();
 		Tourist t1 = new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75);
 		Tourist t2 = new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 1.80);
