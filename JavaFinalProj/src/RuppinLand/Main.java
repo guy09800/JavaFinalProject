@@ -99,22 +99,11 @@ public class Main {
 		main.employeeTree.addPerson(e8);
 		main.employeeTree.addPerson(e9);
 		main.employeeTree.addPerson(e10);
-		//show all the tourists
-		System.out.println("Tourists:");
-		main.visitorsTree.printAll();
-		//show all the employees
-		System.out.println("Employees:");
-		main.employeeTree.printAll();
-		
-		
-		// Call Main Menu : 
 		
 		main.mainMenu();
 		
 	}
 
-	
-	
 	
 	// Main Menu : 
 	
@@ -364,6 +353,11 @@ public class Main {
 							+ ride.getName() + ".");
 					break;
 				case 2:
+					//move the queue
+					if (ride.getQueue().isEmpty()) {
+						System.out.println("Queue is empty.");
+						continue;
+					}
 					break;
 				case 3:
 					break;
