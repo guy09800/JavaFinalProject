@@ -1,8 +1,8 @@
 package RuppinLand;
-import java.time.LocalDateTime;
+import java.time.LocalDateTime;// switch to gregorian GUY
 import personClass.*;
 import java.time.Duration;
-import personClass.Person;
+
 
 public final class Ticket { // Final Class unless we want to inherit from this class.
     

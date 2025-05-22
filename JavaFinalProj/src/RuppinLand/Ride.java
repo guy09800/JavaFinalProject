@@ -1,21 +1,19 @@
 package RuppinLand;
-
-import java.util.Date;
+import personClass.*;
 import java.util.GregorianCalendar;
 import java.util.Queue;
 
-import personClass.Person;
+
 
 public abstract class Ride{
 	String name;
 	int minAge;
 	int minHeight;
 	int maxCapacity;
-	int currentCapacity;
 	int price;
 	Queue<Person> queue;
 	GregorianCalendar nextMaintenanceTime;
-	boolean isOpen;
+	boolean isOpen = false;
 	
 	
 	public void setName(String name) {
@@ -36,19 +34,10 @@ public abstract class Ride{
 		return maxCapacity;
 	}
 
-	public int getCurrentCapacity() {
-		return currentCapacity;
-	}
 
-	public void setCurrentCapacity(int currentCapacity) {
-		if (currentCapacity < 0 || currentCapacity > maxCapacity) {
-			throw new IllegalArgumentException("Current capacity must be between 0 and max capacity");
-		}
-		this.currentCapacity = currentCapacity;
-	}
-
-	public Queue<Person> getQueue() {
-		return queue;
+	public void  printQueue() {// print function GUY
+		
+		
 	}
 
 	public void setQueue(Queue<Person> queue) {
@@ -100,7 +89,6 @@ public abstract class Ride{
 		System.out.println("Minimum Age: " + minAge);
 		System.out.println("Minimum Height: " + minHeight);
 		System.out.println("Max Capacity: " + maxCapacity);
-		System.out.println("Current Capacity: " + currentCapacity);
 		System.out.println("Next Maintenance Time: " + nextMaintenanceTime.getTime());
 		System.out.println("Is Open: " + isOpen);
 	}
@@ -123,5 +111,21 @@ public abstract class Ride{
 		}
 		this.price = price;
 	}
+	public void addToLine(Person tourist) throws Exception {
+		if (tourist == null)
+			throw new Exception("Visitor does not exists..");
+		if (queue.contains(tourist))
+			throw new Exception("Visitor is already in queue...");
+		if (queue.add(tourist))
+			System.out.println("Visitor has been added to queue");	
+		}
+
+	public void operate() throws Exception{
+		
+			if (queue.isEmpty())
+				throw new Exception("line is empty!");
+			queue.remove();
+		}
+	
 	
 }

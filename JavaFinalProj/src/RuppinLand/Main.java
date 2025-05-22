@@ -317,11 +317,7 @@ public class Main {
 						System.out.println("Tourist not found.");
 						continue;
 					}
-					//check if the tourist is in the queue
-					if (ride.getQueue().contains(tourist)) {
-						System.out.println("Tourist " + tourist.getName() + " is already in the queue.");
-						continue;
-					}
+					
 					//check if the ride is open
 					if (!ride.isOpen()) {
 						System.out.println("Ride " + ride.getName() + " is closed.");
@@ -338,23 +334,21 @@ public class Main {
 						System.out.println("Tourist " + tourist.getName() + " is not tall enough for ride "
 								+ ride.getName() + ".");
 						continue;
-					}
-					//check if the ride is full
-					if (ride.getCurrentCapacity() >= ride.getMaxCapacity()) {
-						System.out.println("Ride " + ride.getName() + " is full.");
+					}// method adds a visitor to line, GUY needs to add the conditionals to the original function
+					try {
+                    ride.addToLine(tourist);
+					} catch( Exception e ) {
 						continue;
 					}
-					//add the tourist to the queue
 					//sell the ticket
 					tourist.addVisit(new Ticket(tourist.getId(), tourist.getName(), ride.getName(), ride.getPrice(),LocalDateTime.now(), null));
-					ride.getQueue().add(tourist);
-					ride.setCurrentCapacity(ride.getCurrentCapacity() + 1);
+					// add tourist to queue function GUY
 					System.out.println("Tourist " + tourist.getName() + " has been added to the queue for ride "
 							+ ride.getName() + ".");
 					break;
 				case 2:
 					//move the queue
-					if (ride.getQueue().isEmpty()) {
+					if (ride.queue.isEmpty()) {
 						System.out.println("Queue is empty.");
 						continue;
 					}
