@@ -24,6 +24,12 @@ public class Tourist extends Person {
 	
 	// getters and setters
 	public double getHeight() {return height;}
+	 public void setHight(double height) {
+			if (height < 0) {
+				throw new IllegalArgumentException("Height cannot be negative");
+			}
+			this.height = height;
+	 }
 	public void setHeight(double height) {this.height = height;}
 	
 	public Stack<Ticket> getVisitStack() {return visitStack;}

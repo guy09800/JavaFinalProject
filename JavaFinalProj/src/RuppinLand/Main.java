@@ -317,34 +317,15 @@ public class Main {
 						System.out.println("Tourist not found.");
 						continue;
 					}
-					
-					//check if the ride is open
-					if (!ride.isOpen()) {
-						System.out.println("Ride " + ride.getName() + " is closed.");
-						continue;
-					}
-					//check if the tourist is old enough
-					if (tourist.getAge() < ride.getMinAge()) {
-						System.out.println(
-								"Tourist " + tourist.getName() + " is not old enough for ride " + ride.getName() + ".");
-						continue;
-					}
-					//check if the tourist is tall enough
-					if (tourist.getHeight() < ride.getMinHeight()) {
-						System.out.println("Tourist " + tourist.getName() + " is not tall enough for ride "
-								+ ride.getName() + ".");
-						continue;
-					}// method adds a visitor to line, GUY needs to add the conditionals to the original function
+					// trying to add tourist to line
 					try {
                     ride.addToLine(tourist);
 					} catch( Exception e ) {
 						continue;
 					}
 					//sell the ticket
-					tourist.addVisit(new Ticket(tourist.getId(), tourist.getName(), ride.getName(), ride.getPrice(),LocalDateTime.now(), null));
-					// add tourist to queue function GUY
-					System.out.println("Tourist " + tourist.getName() + " has been added to the queue for ride "
-							+ ride.getName() + ".");
+					tourist.addVisit(new Ticket(tourist.getId(), tourist.getName(), ride.getName(), ride.getPrice(), new GregorianCalendar(), null));
+					
 					break;
 				case 2:
 					//move the queue

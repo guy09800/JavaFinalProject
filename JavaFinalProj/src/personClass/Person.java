@@ -7,7 +7,6 @@ public abstract class Person {
 	private String id;
 	private String name;
 	private GregorianCalendar birthday;
-	private int height;
 	
 	//default constructor
 	public Person() {
@@ -31,7 +30,6 @@ public abstract class Person {
 			this.name = other.name;
 			this.birthday = new GregorianCalendar();
 			this.birthday.setTime(other.birthday.getTime());
-			this.height = other.height;
 	 }
 	 //getters and setters
 	 public String getId() {return id; }
@@ -62,12 +60,6 @@ public abstract class Person {
 		return age;
 			            
 	 }
-	 public int getHight() {return height;}
-	 public void setHight(int height) {
-			if (height < 0) {
-				throw new IllegalArgumentException("Height cannot be negative");
-			}
-			this.height = height;
-	 }
+
 	
 }

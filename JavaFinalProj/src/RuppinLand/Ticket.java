@@ -1,5 +1,6 @@
 package RuppinLand;
-import java.time.LocalDateTime;// switch to gregorian GUY
+import java.util.Calendar;
+import java.util.GregorianCalendar;// switch to gregorian GUY
 import personClass.*;
 import java.time.Duration;
 
@@ -10,12 +11,12 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     private String touristName;
     private String rideName;
     private double price;
-    private LocalDateTime buyDateTime;
-    private LocalDateTime playDateTime;
+    private GregorianCalendar buyDateTime;
+    private GregorianCalendar playDateTime;
 
     // Constructor :
     
-    public Ticket(String id, String touristName, String rideName, double price, LocalDateTime buyDateTime, LocalDateTime playDateTime) {
+    public Ticket(String id, String touristName, String rideName, double price, GregorianCalendar buyDateTime, GregorianCalendar playDateTime) {
         if (touristName == null) {
             throw new IllegalArgumentException("Person cannot be null.");
         }
@@ -32,7 +33,7 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         this.rideName = rideName;
         this.price = price;
         this.buyDateTime = buyDateTime;
-        this.playDateTime = playDateTime;
+        this.playDateTime = new GregorianCalendar(9999, Calendar.DECEMBER, 31);// a far year so until the play time it would be valid
     }
     
  // Copy Constructor:
@@ -55,12 +56,7 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     // Check if ticket is valid -> Play time after purchase time.
     
     public boolean isValid() {
-        return playDateTime.isAfter(buyDateTime);
-    }
-    // Return how long is it between purchase and play time in minutes : 
-    
-    public long getDurationBetweenBuyAndPlayMinutes() {
-        return Duration.between(buyDateTime, playDateTime).toMinutes();
+        return buyDateTime.compareTo(playDateTime)> 0;
     }
 
     // Apply Discount (Percentage Based %) : 
@@ -98,11 +94,11 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         return price;
     }
 
-    public LocalDateTime getBuyDateTime() {
+    public GregorianCalendar getBuyDateTime() {
         return buyDateTime;
     }
 
-    public LocalDateTime getPlayDateTime() {
+    public GregorianCalendar getPlayDateTime() {
         return playDateTime;
     }
 
@@ -131,14 +127,14 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         this.price = price;
     }
 
-    public void setBuyDateTime(LocalDateTime buyDateTime) {
+    public void setBuyDateTime(GregorianCalendar buyDateTime) {
         if (buyDateTime == null) {
             throw new IllegalArgumentException("Buy date/time cannot be null.");
         }
         this.buyDateTime = buyDateTime;
     }
 
-    public void setPlayDateTime(LocalDateTime playDateTime) {
+    public void setPlayDateTime(GregorianCalendar playDateTime) {
         if (playDateTime == null) {
             throw new IllegalArgumentException("Play date/time cannot be null.");
         }

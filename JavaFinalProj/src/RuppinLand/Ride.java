@@ -2,6 +2,7 @@ package RuppinLand;
 import personClass.*;
 import java.util.GregorianCalendar;
 import java.util.Queue;
+import java.util.Stack;
 
 
 
@@ -11,7 +12,7 @@ public abstract class Ride{
 	int minHeight;
 	int maxCapacity;
 	int price;
-	Queue<Person> queue;
+	Queue<Tourist> queue;
 	GregorianCalendar nextMaintenanceTime;
 	boolean isOpen = false;
 	
@@ -40,7 +41,7 @@ public abstract class Ride{
 		
 	}
 
-	public void setQueue(Queue<Person> queue) {
+	public void setQueue(Queue<Tourist> queue) {
 		if (queue == null) {
 			throw new IllegalArgumentException("Queue cannot be null");
 		}
@@ -111,11 +112,20 @@ public abstract class Ride{
 		}
 		this.price = price;
 	}
-	public void addToLine(Person tourist) throws Exception {
-		if (tourist == null)
-			throw new Exception("Visitor does not exists..");
+	public void addToLine(Tourist tourist) throws Exception {
+		//check if ride is open
+		if (!isOpen()) 
+			throw new Exception("Ride " + getName() + " is closed.");
+		// check if visitor is at the right age
+		if (tourist.getAge() < getMinAge()) 
+			throw new Exception("Tourist " + tourist.getName() + " is not old enough for ride " + getName() + ".");
+		// check if visitor is at the right height
+		if (tourist.getHeight() < getMinHeight()) 
+			throw new Exception("Tourist " + tourist.getName() + " is not tall enough for ride "+ getName() + ".");
+		// check if visitor is already at the queue
 		if (queue.contains(tourist))
 			throw new Exception("Visitor is already in queue...");
+		//adding to queue
 		if (queue.add(tourist))
 			System.out.println("Visitor has been added to queue");	
 		}
@@ -124,8 +134,14 @@ public abstract class Ride{
 		
 			if (queue.isEmpty())
 				throw new Exception("line is empty!");
-			queue.remove();
+			// for every tourist that gets on the ride, validates its ticket and setting the play date to current date and time
+			for (int i = 0; i <= maxCapacity; i++) {
+				 Tourist tourist =queue.remove();
+				 Ticket ticket = tourist.getVisitStack().peek();
+				 ticket.setPlayDateTime(new GregorianCalendar());
+				 
+			
 		}
 	
-	
+	}
 }
