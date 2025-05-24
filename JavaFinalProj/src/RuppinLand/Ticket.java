@@ -7,8 +7,6 @@ import java.time.Duration;
 
 public final class Ticket { // Final Class unless we want to inherit from this class.
     
-    private String id;
-    private String touristName;
     private String rideName;
     private double price;
     private GregorianCalendar buyDateTime;
@@ -16,20 +14,15 @@ public final class Ticket { // Final Class unless we want to inherit from this c
 
     // Constructor :
     
-    public Ticket(String id, String touristName, String rideName, double price, GregorianCalendar buyDateTime, GregorianCalendar playDateTime) {
-        if (touristName == null) {
-            throw new IllegalArgumentException("Person cannot be null.");
-        }
+    public Ticket(String rideName, double price, GregorianCalendar buyDateTime, GregorianCalendar playDateTime) {
         if (rideName == null) {
             throw new IllegalArgumentException("ride cannot be null.");
         }
-        if (buyDateTime == null || playDateTime == null) {
+        if (buyDateTime == null) {
             throw new IllegalArgumentException("Date/time values cannot be null.");
         }
         if (price < 0) throw new IllegalArgumentException("Price cannot be negative.");
-        
-        this.id = id;
-        this.touristName = touristName;
+
         this.rideName = rideName;
         this.price = price;
         this.buyDateTime = buyDateTime;
@@ -42,8 +35,6 @@ public final class Ticket { // Final Class unless we want to inherit from this c
             throw new IllegalArgumentException("Cannot copy from a null Ticket.");
         }
 
-        this.id = other.id;
-        this.touristName = touristName; // Deep Copy - PERSON CLASS MUST HAVE COPY CTOR!
         this.rideName = other.rideName; // Deep Copy - ATTRACTION CLASS MUST HAVE COPY CTOR! 
         this.price = other.price;
         this.buyDateTime = other.buyDateTime;
@@ -72,19 +63,10 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     
     @Override // Annotation for compiler to override Object's toString().
     public String toString() {
-        return "Ticket #" + id + " for " + touristName + " to " + rideName + 
-               " | Price: " + price + " | Buy: " + buyDateTime + " | Play: " + playDateTime;
+        return "Ticket #" +" to " + rideName + " | Price: " + price + " | Buy: " + buyDateTime + " | Play: " + playDateTime;
     }
 
     // Getters:
-    
-    public String getId() {
-        return id;
-    }
-
-    public String getTouristName() {
-        return touristName;
-    }
 
     public String getRideName() {
         return rideName;
@@ -103,17 +85,6 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     }
 
     // Setters :
-    
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setTouristName(String touristName) {
-		if (touristName == null) {
-			throw new IllegalArgumentException("Person cannot be null.");
-        }
-        	this.touristName = touristName;
-    }
 
 	public void setRideName(String rideName) {
 		if (rideName == null) {

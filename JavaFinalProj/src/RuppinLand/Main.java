@@ -13,13 +13,12 @@ import personClass.Person;
 import personClass.Tourist;
 import dataStruct.PersonTree;
 
-
 public class Main {
     private PersonTree employeeTree;
     private PersonTree visitorsTree;
-    private LinkedList<Ride> attractions;
-    private static List<Object> departments;
     private boolean isOpen;
+    private static LinkedList<Ride> attractions;
+    private static List<Object> departments;
     private static Scanner scanner = new Scanner(System.in);
     
     
@@ -40,72 +39,65 @@ public class Main {
 		
 		Main main = new Main();
 		
+		// create new departments:
 	    Technician technician = new Technician("Technician");
 	    Operator operator = new Operator("Operator");
 	    Reception reception = new Reception("Reception");
 	    Management management = new Management("Management");
-	    
+	    // Add departments to the list
 	    departments.add(technician);
 	    departments.add(operator);
 	    departments.add(reception);
 	    departments.add(management);
-	    
+		// create new 6 attractions:
+		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 8));
+		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 5));
+		attractions.add(new FerrysWheel("Giant Wheel", 5, 100, 10, 20, new GregorianCalendar(2024, 6, 15)));
+		attractions.add(new FerrysWheel("Sky Wheel", 6, 110, 12, 25, new GregorianCalendar(2024, 8, 20)));
+		attractions.add(new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 7));
+		attractions.add(new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 9));
+		//create 3 ticket stacks for the attractions:
+		Stack<Ticket> ticketStack1 = new Stack<>();
+		Stack<Ticket> ticketStack2 = new Stack<>();
+		Stack<Ticket> ticketStack3 = new Stack<>();
+		// add to the stack tickets with the last paramater the time of now:
+		ticketStack1.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack1.add(new Ticket("Sky Wheel", 20, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack1.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
+		ticketStack2.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack2.add(new Ticket("Giant Wheel", 25, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack2.add(new Ticket("Scary Mansion", 60, new GregorianCalendar(), null));
+		ticketStack3.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack3.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
+		ticketStack3.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
+		// create new 10 tourists:
+		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75).setticketStack(ticketStack1));
+		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 1.80).setticketStack(ticketStack2));
+		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 1.65).setticketStack(ticketStack3));
+		main.visitorsTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 1.70));
+		main.visitorsTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 1.60));
+		main.visitorsTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 1.85));
+		main.visitorsTree.addPerson(new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 1.55));
+		main.visitorsTree.addPerson(new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 1.90));
+		main.visitorsTree.addPerson(new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 1.50));
+		main.visitorsTree.addPerson(new Tourist("10", "Judy", new GregorianCalendar(1955, 10, 10), 1.95));
+		// create 10 employees:
+		main.employeeTree.addPerson(new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Management", 100));
+		main.employeeTree.addPerson(new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Reception", 80));
+		main.employeeTree.addPerson(new Employee("13", "Mallory", new GregorianCalendar(1980, 3, 3), "Reception", 90));
+		main.employeeTree.addPerson(new Employee("14", "Nina", new GregorianCalendar(1975, 4, 4), "Technician", 70));
+		main.employeeTree.addPerson(new Employee("15", "Oscar", new GregorianCalendar(1970, 5, 5), "Operator", 60));
+		main.employeeTree.addPerson(new Employee("16", "Peggy", new GregorianCalendar(1965, 6, 6), "Operator", 85));
+		main.employeeTree.addPerson(new Employee("17", "Quentin", new GregorianCalendar(1960, 7, 7), "Operator", 75));
+		main.employeeTree.addPerson(new Employee("18", "Rupert", new GregorianCalendar(1955, 8, 8), "Management", 110));
+		main.employeeTree.addPerson(new Employee("19", "Sybil", new GregorianCalendar(1950, 9, 9), "Technician", 65));
+		main.employeeTree.addPerson(new Employee("20", "Trent", new GregorianCalendar(1945, 10, 10), "Reception", 55));
+	    // add for 5 person 2 or 3 or 4 ticket in each one ticket stack:
+		
 		System.out.println("Welcome to Ruppin Land!");
-		//create new departments
-		
-		// create new 10 tourists
-		
-		Tourist t1 = new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75);
-		Tourist t2 = new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 1.80);
-		Tourist t3 = new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 1.65);
-		Tourist t4 = new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 1.70);
-		Tourist t5 = new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 1.60);
-		Tourist t6 = new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 1.85);
-		Tourist t7 = new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 1.55);
-		Tourist t8 = new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 1.90);
-		Tourist t9 = new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 1.50);
-		Tourist t10 = new Tourist("10", "Judy", new GregorianCalendar(1955, 10, 10), 1.95);
-		// add tourists to the tree
-		main.visitorsTree.addPerson(t1);
-		main.visitorsTree.addPerson(t2);
-		main.visitorsTree.addPerson(t3);
-		main.visitorsTree.addPerson(t4);
-		main.visitorsTree.addPerson(t5);
-		main.visitorsTree.addPerson(t6);
-		main.visitorsTree.addPerson(t7);
-		main.visitorsTree.addPerson(t8);
-		main.visitorsTree.addPerson(t9);
-		main.visitorsTree.addPerson(t10);
-		
-		// create 10 employees
-		Employee e1 = new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Management", 100);
-		Employee e2 = new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Reception", 80);
-		Employee e3 = new Employee("13", "Mallory", new GregorianCalendar(1980, 3, 3), "Reception", 90);
-		Employee e4 = new Employee("14", "Nina", new GregorianCalendar(1975, 4, 4), "Technician", 70);
-		Employee e5 = new Employee("15", "Oscar", new GregorianCalendar(1970, 5, 5), "Operator", 60);
-		Employee e6 = new Employee("16", "Peggy", new GregorianCalendar(1965, 6, 6), "Operator", 85);
-		Employee e7 = new Employee("17", "Quentin", new GregorianCalendar(1960, 7, 7), "Operator", 75);
-		Employee e8 = new Employee("18", "Rupert", new GregorianCalendar(1955, 8, 8), "Management", 110);
-		Employee e9 = new Employee("19", "Sybil", new GregorianCalendar(1950, 9, 9), "Technician", 65);
-		Employee e10 = new Employee("20", "Trent", new GregorianCalendar(1945, 10, 10), "Reception", 55);
-		// add employees to the tree
-		main.employeeTree.addPerson(e1);
-		main.employeeTree.addPerson(e2);
-		main.employeeTree.addPerson(e3);
-		main.employeeTree.addPerson(e4);
-		main.employeeTree.addPerson(e5);
-		main.employeeTree.addPerson(e6);
-		main.employeeTree.addPerson(e7);
-		main.employeeTree.addPerson(e8);
-		main.employeeTree.addPerson(e9);
-		main.employeeTree.addPerson(e10);
-		
 		main.mainMenu();
 		
 	}
-
-	
-	// Main Menu : 
 	
 	public void mainMenu () {
 		while (true) {
@@ -144,12 +136,7 @@ public class Main {
 			}
 		}
 	}
-	
-	
-	
-	// All Types of Menus : 
-	
-	
+
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
@@ -274,9 +261,7 @@ public class Main {
 			}
 		}
 	}
-	
-	
-	
+		
 	
 	public void operatorMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
@@ -324,7 +309,7 @@ public class Main {
 						continue;
 					}
 					//sell the ticket
-					tourist.addVisit(new Ticket(tourist.getId(), tourist.getName(), ride.getName(), ride.getPrice(), new GregorianCalendar(), null));
+					tourist.addVisit(new Ticket(ride.getName(), ride.getPrice(), new GregorianCalendar(), null));
 					
 					break;
 				case 2:

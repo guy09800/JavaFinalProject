@@ -6,20 +6,20 @@ import RuppinLand.*;
 
 public class Tourist extends Person {
 	private double height;
-	private Stack<Ticket> visitStack;
+	private Stack<Ticket> ticketStack;
 	
 	// default constructor
 	public Tourist() {
 		super();
 		this.height = 0.0;
-		this.visitStack = new Stack<Ticket>();
+		this.ticketStack = new Stack<Ticket>();
 	}
 	
 	// constructor with parameters
 	public Tourist(String id, String name, GregorianCalendar birthday, double height) {
 		super(id, name, birthday);
 		this.height = height;
-		this.visitStack = new Stack<Ticket>();
+		this.ticketStack = new Stack<Ticket>();
 	}
 	
 	// getters and setters
@@ -32,8 +32,11 @@ public class Tourist extends Person {
 	 }
 	public void setHeight(double height) {this.height = height;}
 	
-	public Stack<Ticket> getVisitStack() {return visitStack;}
-	public void setVisitStack(Stack<Ticket> visitStack) {this.visitStack = visitStack;}
+	public Stack<Ticket> getticketStack() {return ticketStack;}
+	public Tourist setticketStack(Stack<Ticket> ticketStack) {
+		this.ticketStack = ticketStack;
+		return this;
+		}
 	
 	// Override of the abstract method from Person –
 	// prints tourist-specific details to the console
@@ -64,16 +67,16 @@ public class Tourist extends Person {
 	
 	
 	// method to check if the stack is empty	
-	public boolean isVisitStackEmpty() {return visitStack.isEmpty();}
+	public boolean isticketStackEmpty() {return ticketStack.isEmpty();}
 	
 	// method to add a visit to the stack
-	public void addVisit(Ticket ticket) {visitStack.push(ticket);}
+	public void addVisit(Ticket ticket) {ticketStack.push(ticket);}
 	
 	
 	// method to remove a visit from the stack
 	public Ticket removeVisit() {
-		if (!visitStack.isEmpty()) 
-			return visitStack.pop();
+		if (!ticketStack.isEmpty()) 
+			return ticketStack.pop();
 		 else {
 			System.out.println("No visits to remove.");
 			return null;
@@ -82,8 +85,8 @@ public class Tourist extends Person {
 	
 	// method to get the last visit
 	public Ticket getLastVisit() {
-		if (!visitStack.isEmpty()) 
-			return visitStack.peek();
+		if (!ticketStack.isEmpty()) 
+			return ticketStack.peek();
 		 else {
 			System.out.println("No visits recorded.");
 			return null;
@@ -91,8 +94,8 @@ public class Tourist extends Person {
 	}
 	// method to get the first visit
 	public Ticket getFirstVisit() {
-		if (!visitStack.isEmpty())
-			return visitStack.firstElement();
+		if (!ticketStack.isEmpty())
+			return ticketStack.firstElement();
 		else {
 			System.out.println("No visits recorded.");
 			return null;
@@ -100,16 +103,16 @@ public class Tourist extends Person {
 	}
 	
 	// method to get the number of visits
-	public int getNumberOfVisits() {return visitStack.size();}
+	public int getNumberOfVisits() {return ticketStack.size();}
 	
 	// method to clear all visits
-	public void clearVisits() {visitStack.clear();}
+	public void clearVisits() {ticketStack.clear();}
 	
 	// method to print all visits
 	public void printAllVisits() {
-		if (!visitStack.isEmpty()) {
+		if (!ticketStack.isEmpty()) {
 			System.out.println("Visits:");
-			for (Ticket visit : visitStack) {
+			for (Ticket visit : ticketStack) {
 				System.out.println(visit);
 			}
 		} else {
@@ -121,7 +124,7 @@ public class Tourist extends Person {
 	// This method is used in toString() instead of printing directly
 	private String getFormattedVisits() {
 	    // If the stack is empty, return a message indicating no visits
-	    if (visitStack.isEmpty()) 
+	    if (ticketStack.isEmpty()) 
 		     return "No visits recorded.";
 		 
 
@@ -129,7 +132,7 @@ public class Tourist extends Person {
 	    StringBuilder sb = new StringBuilder("Visits:\n");
 
 	    // Loop through each visit in the stack (from bottom to top)
-	    for (Ticket visit : visitStack) 
+	    for (Ticket visit : ticketStack) 
 	        // Append each visit's date in readable format with a bullet point
             sb.append("- ").append(visit.getBuyDateTime()).append("\n");
 		    

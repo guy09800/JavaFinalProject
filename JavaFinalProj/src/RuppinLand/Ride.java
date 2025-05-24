@@ -16,6 +16,15 @@ public abstract class Ride{
 	GregorianCalendar nextMaintenanceTime;
 	boolean isOpen = false;
 	
+	public Ride(String name, int minAge, int minHeight, int maxCapacity, int price, GregorianCalendar nextMaintenanceTime) {
+		setName(name);
+		setMinAge(minAge);
+		setMinHeight(minHeight);
+		setMaxCapacity(maxCapacity);
+		setPrice(price);
+		setNextMaintenanceTime(nextMaintenanceTime);
+	}
+	
 	
 	public void setName(String name) {
 		if (name == null || name.isEmpty()) {
@@ -137,7 +146,7 @@ public abstract class Ride{
 			// for every tourist that gets on the ride, validates its ticket and setting the play date to current date and time
 			for (int i = 0; i <= maxCapacity; i++) {
 				 Tourist tourist =queue.remove();
-				 Ticket ticket = tourist.getVisitStack().peek();
+				 Ticket ticket = tourist.getticketStack().peek();
 				 ticket.setPlayDateTime(new GregorianCalendar());
 				 
 			
