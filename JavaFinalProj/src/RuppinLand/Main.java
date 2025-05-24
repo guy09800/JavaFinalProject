@@ -21,9 +21,6 @@ public class Main {
     private static List<Object> departments;
     private static Scanner scanner = new Scanner(System.in);
     
-    
-    // Constructor : 
-    
 	public Main() {
 		this.employeeTree = new PersonTree();
 		this.visitorsTree = new PersonTree();
@@ -32,23 +29,15 @@ public class Main {
 		this.isOpen = false;
 	}
 
-	
-	// Main : 
-	
 	public static void main(String[] args) {
 		
 		Main main = new Main();
-		
-		// create new departments:
-	    Technician technician = new Technician("Technician");
-	    Operator operator = new Operator("Operator");
-	    Reception reception = new Reception("Reception");
-	    Management management = new Management("Management");
+		main.setIsOpen(true);
 	    // Add departments to the list
-	    departments.add(technician);
-	    departments.add(operator);
-	    departments.add(reception);
-	    departments.add(management);
+	    departments.add(new Technician("Technician"));
+	    departments.add(new Operator("Operator"));
+	    departments.add(new Reception("Reception"));
+	    departments.add(new Management("Management"));
 		// create new 6 attractions:
 		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 8));
 		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 5));
@@ -60,7 +49,7 @@ public class Main {
 		Stack<Ticket> ticketStack1 = new Stack<>();
 		Stack<Ticket> ticketStack2 = new Stack<>();
 		Stack<Ticket> ticketStack3 = new Stack<>();
-		// add to the stack tickets with the last paramater the time of now:
+		// add to the stack tickets:
 		ticketStack1.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
 		ticketStack1.add(new Ticket("Sky Wheel", 20, new GregorianCalendar(), new GregorianCalendar()));
 		ticketStack1.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
@@ -99,6 +88,10 @@ public class Main {
 		
 	}
 	
+	private void setIsOpen(boolean b) {
+		isOpen = b;
+	}
+
 	public void mainMenu () {
 		while (true) {
 			

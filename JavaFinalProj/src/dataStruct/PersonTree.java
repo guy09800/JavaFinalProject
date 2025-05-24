@@ -5,10 +5,11 @@ import personClass.Person;
 public class PersonTree {
 	TreeNode root;
 
-	public PersonTree() {
-		this.root = null;
-	}
-
+	public PersonTree() {this.root = null;}
+	public TreeNode getRoot() {return root;}
+	public Person searchPerson(int id) {return searchPersonRec(root, id);}
+	public void printAll() {printAllPerson(root);}
+	
 	public void addPerson(Person person) {
 		if (person == null) {
 			throw new IllegalArgumentException("Person cannot be null");
@@ -18,7 +19,8 @@ public class PersonTree {
 		} else {
 			addPersonRec(root, person);
 		}
-		}
+	}
+	
 	private void addPersonRec(TreeNode current, Person person) {
 		if (current == null) {
 			return;
@@ -39,11 +41,7 @@ public class PersonTree {
 			throw new IllegalArgumentException("Person with this ID already exists");
 		}
 	}
-
-	public Person searchPerson(int id) {
-		return searchPersonRec(root, id);
-	}
-
+	
 	private Person searchPersonRec(TreeNode current, int id) {
 		if (current == null) {
 			return null;
@@ -57,11 +55,6 @@ public class PersonTree {
 		}
 	}
 
-	public void printAll() {
-		printAllPerson(root);
-	}
-	
-	
 	public void printByDepartment(String departmentName, boolean OneLine) {
 		
 	    if (departmentName == null || departmentName.isBlank()) {
@@ -70,7 +63,6 @@ public class PersonTree {
 	    }
 
 	    System.out.println("Employees in department: " + departmentName);
-	     
 	    printByDepartmentRec(root, departmentName.trim(), OneLine); 
 	}
 	    
@@ -97,9 +89,6 @@ public class PersonTree {
 	    printByDepartmentRec(node.getRight(), departmentName, OneLine);
 	}
 
-
-	
-
 	private void printAllPerson(TreeNode node) {
 		if (node != null) {
 			printAllPerson(node.getLeft());
@@ -107,11 +96,5 @@ public class PersonTree {
 			printAllPerson(node.getRight());
 		}
 	}
-
-
-public TreeNode getRoot() {
-    return root;
-}
-
 }
 

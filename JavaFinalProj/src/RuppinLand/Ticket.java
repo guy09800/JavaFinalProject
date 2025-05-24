@@ -58,31 +58,16 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         }
     }
     
-
-    // toString method override – returns a readable summary of the ticket
-    
     @Override // Annotation for compiler to override Object's toString().
     public String toString() {
         return "Ticket #" +" to " + rideName + " | Price: " + price + " | Buy: " + buyDateTime + " | Play: " + playDateTime;
     }
 
     // Getters:
-
-    public String getRideName() {
-        return rideName;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public GregorianCalendar getBuyDateTime() {
-        return buyDateTime;
-    }
-
-    public GregorianCalendar getPlayDateTime() {
-        return playDateTime;
-    }
+    public String getRideName() {return rideName;}
+    public double getPrice() {return price;}
+    public GregorianCalendar getBuyDateTime() {return buyDateTime;}
+    public GregorianCalendar getPlayDateTime() {return playDateTime;}
 
     // Setters :
 
@@ -97,14 +82,14 @@ public final class Ticket { // Final Class unless we want to inherit from this c
     	if (price < 0) throw new IllegalArgumentException("Price cannot be negative.");
         this.price = price;
     }
-
+    
     public void setBuyDateTime(GregorianCalendar buyDateTime) {
         if (buyDateTime == null) {
             throw new IllegalArgumentException("Buy date/time cannot be null.");
         }
         this.buyDateTime = buyDateTime;
     }
-
+    
     public void setPlayDateTime(GregorianCalendar playDateTime) {
         if (playDateTime == null) {
             throw new IllegalArgumentException("Play date/time cannot be null.");
