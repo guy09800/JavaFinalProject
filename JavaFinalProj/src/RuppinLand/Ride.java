@@ -139,18 +139,26 @@ public abstract class Ride{
 			System.out.println("Visitor has been added to queue");	
 		}
 
-	public void operate() throws Exception{
+	public void operate(){
 		
-			if (queue.isEmpty())
-				throw new Exception("line is empty!");
-			// for every tourist that gets on the ride, validates its ticket and setting the play date to current date and time
-			for (int i = 0; i <= maxCapacity; i++) {
+		if (queue.isEmpty())
+				System.out.println("Queue is empty, no tourists to move forward");
+			
+		for (int i = 0; i <= maxCapacity; i++) {
 				 Tourist tourist =queue.remove();
 				 Ticket ticket = tourist.getticketStack().peek();
 				 ticket.setPlayDateTime(new GregorianCalendar());
-				 
-			
 		}
-	
 	}
+    public void removeFromQueue(Tourist tourist) {
+        if (tourist == null) {
+        	return;
+        }
+		if (queue.contains(tourist)) {
+			queue.remove(tourist);
+			System.out.println("Tourist " + tourist.getName() + " has been removed from the queue.");
+		} else {
+			System.out.println("Tourist " + tourist.getName() + " is not in the queue.");
+		}
+    }
 }

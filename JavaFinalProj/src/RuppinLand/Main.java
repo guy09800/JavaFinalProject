@@ -81,21 +81,16 @@ public class Main {
 		main.employeeTree.addPerson(new Employee("18", "Rupert", new GregorianCalendar(1955, 8, 8), "Management", 110));
 		main.employeeTree.addPerson(new Employee("19", "Sybil", new GregorianCalendar(1950, 9, 9), "Technician", 65));
 		main.employeeTree.addPerson(new Employee("20", "Trent", new GregorianCalendar(1945, 10, 10), "Reception", 55));
-	    // add for 5 person 2 or 3 or 4 ticket in each one ticket stack:
 		
 		System.out.println("Welcome to Ruppin Land!");
 		main.mainMenu();
 		
 	}
 	
-	private void setIsOpen(boolean b) {
-		isOpen = b;
-	}
-
 	public void mainMenu () {
 		while (true) {
-			
-			System.out.println("Please enter your ID or 0 to exit:");
+		
+			System.out.println("Hello Employee, Please enter your ID or 0 to exit the system:");
 			String id = scanner.nextLine();
 			if (id.equals("0")) {
 				System.out.println("Are you sure you want to exit? (y/n)");
@@ -132,37 +127,26 @@ public class Main {
 
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
+		System.out.println("1. Print all tourists in the park today");
 		while (true) {
 			break;
 		}
-	}
+}
 
 	public void technicianMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
-			System.out.println("Please enter the ride name:");
-			//print all attractions names
-			for (Ride ride : attractions) {
-				System.out.println(ride.getName());
-			}
-			String rideName = scanner.nextLine();
-			Ride ride = null;
-			for (Ride r : attractions) {
-				if (r.getName().equals(rideName)) {
-					ride = r;
-					break;
-				}
-			}
-			if (ride == null) {
-				System.out.println("Ride not found.");
-				continue;
-			}
+			Ride ride = getRideFromUser();
+			if (ride == null) {continue;}
+			
 			while(true)
 			{
-				System.out.println("1. Open ride	4. Get ride details");
-				System.out.println("2. Close ride	5. Get complaint from tourist");
-				System.out.println("3. Fix ride    6. Print All Technicians");
-				System.out.println("7. Exit");
+				System.out.println(
+					    "1. Open ride\t4. Get ride details\n" +
+					    "2. Close ride\t5. Get complaint from tourist\n" +
+					    "3. Fix ride\t6. Print All Rides next maintenance time\n" +
+					    "7. Exit"
+					);
 				
                 int choice = scanner.nextInt();
                 scanner.nextLine();
@@ -176,74 +160,41 @@ public class Main {
 					System.out.println("Ride " + ride.getName() + " is now closed.");
 					break;
 				case 3:
-					//get from user next maintenance time
-					System.out.println("Please enter the next maintenance time (yyyy-mm-dd):");
-					String date = scanner.nextLine();
-					String[] dateParts = date.split("-");
-					int year = Integer.parseInt(dateParts[0]);
-					int month = Integer.parseInt(dateParts[1]) - 1; // Month is 0-based in GregorianCalendar
-					int day = Integer.parseInt(dateParts[2]);
-					GregorianCalendar nextMaintenanceTime = new GregorianCalendar(year, month, day);
+					GregorianCalendar nextMaintenanceTime = getDateFromUser();
 					ride.setNextMaintenanceTime(nextMaintenanceTime);
-					System.out.println("Ride " + ride.getName() + " is under maintenance.");
+					System.out.println("Ride " + ride.getName() + " has been fixed and next maintenance time is set to " + nextMaintenanceTime.getTime());
 					break;
 				case 4:
 					ride.printDetails();
 					break;
 				case 5:
-				    System.out.println("Please enter the tourist ID:");
-				    String touristId = scanner.nextLine();
-				    Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
-				    if (tourist == null) {
-				        System.out.println("Tourist not found.");
-				        break;
-				    }
-				 // Find the Technician instance in the departments list
-				    Technician technician = null;
-				    for (Object obj : departments) {
-				        if (obj instanceof Technician) {
-				            technician = (Technician) obj;
-				            break;
-				        }
-				    }
-
-				    if (technician != null) {
-				        technician.handleCustomer(tourist, ride);
-				    }
-				    else {
-				        System.out.println("Technician department not found.");
-				    }
+					Tourist tourist = getTouristFromUser();
+					if (tourist == null) {continue;}
+					System.out.println("Please enter the complaint regarding the ride " + ride.getName() + ":");
+					String complaint = scanner.nextLine();
+					System.out.println("Please enter:\n1 - to fix the ride\n2 - to do nothing\n3 - to close the ride:");
+					int fixChoice = scanner.nextInt();
+					scanner.nextLine();
+					switch (fixChoice) {
+						case 1:
+							GregorianCalendar nextMaintenanceTime1 = getDateFromUser();
+							ride.setNextMaintenanceTime(nextMaintenanceTime1);
+							System.out.println("Ride " + ride.getName() + " has been fixed and next maintenance time is set to " + nextMaintenanceTime1.getTime());
+							break;
+						case 2:
+							System.out.println("No action taken.");
+							break;
+						case 3:
+							ride.setOpen(false);
+							System.out.println("Ride " + ride.getName() + " is now closed.");
+							break;
+					}
 				    break;
 				case 6:
-				    // Find the Technician instance in the departments list
-				    Technician sometechnician = null;
-
-				    for (Object obj : departments) {
-				        if (obj instanceof Technician) {
-				            sometechnician = (Technician) obj;
-				            break;
-				        }
-				    }
-
-				    if (sometechnician != null) {
-				    	
-				        System.out.println("Would you like to print in a single line? (Y/N)");
-				        
-				        String YNchoice = scanner.nextLine().trim().toUpperCase();
-				        
-				        if (YNchoice.startsWith("N")) {
-				            sometechnician.printDetails(employeeTree);
-				        } else if (YNchoice.startsWith("Y")) {
-				            sometechnician.printDetailsOneLine(employeeTree);
-				        } else {
-				            System.out.println("Invalid choice. Returning to menu.");
-				        }
-				    }
-				    
-				    else {
-				        System.out.println("Technician department not found.");
-				    }
-				    
+					System.out.println("Rides next maintenance times:");
+					for (Ride r : attractions) {
+						System.out.println("Ride: " + r.getName() + ", Next Maintenance Time: " + r.getNextMaintenanceTime().getTime());
+					}
 				    break;
 				case 7:
 			        System.out.println("Exiting...");
@@ -253,74 +204,55 @@ public class Main {
 				}
 			}
 		}
-	}
-		
+	}		
 	
 	public void operatorMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
-			System.out.println("Please enter the ride name:");
-			//print all attractions names
-			for (Ride ride : attractions) {
-				System.out.println(ride.getName());
-			}
-			String rideName = scanner.nextLine();
-			Ride ride = null;
-			for (Ride r : attractions) {
-				if (r.getName().equals(rideName)) {
-					ride = r;
-					break;
-				}
-			}
-			if (ride == null) {
-				System.out.println("Ride not found.");
-				continue;
-			}
+			Ride ride = getRideFromUser();
+			if (ride == null) {continue;}
+			
 			while(true)
 			{
-				//print the menu 1.sell ticket 2. move the queue 3. get person from the queue 4. close ride 5. open ride 6. get ride details 7. exit
-				System.out.println("1. Sell ticket	5. Open ride");
-				System.out.println("2. Move the queue	6. Get ride details");
-				System.out.println("3. Get person from the queue	7. Exit");
-				System.out.println("4. Close ride");
+				System.out.println(
+					    "1. Sell ticket\t\t\t\t\t5. Open ride\n" +
+					    "2. Move the queue and start the attraction\t6. Get ride details\n" +
+					    "3. Get out person from the queue\t\t7. Print all tourists in the queue\n" +
+					    "4. Close ride\t\t\t\t\t8. Exit"
+					);
 				int choice = scanner.nextInt();
 				scanner.nextLine();
 				switch (choice) {
 				case 1:
-					//get from user the tourist id
-					System.out.println("Please enter the tourist id:");
-					String touristId = scanner.nextLine();
-					Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
-					if (tourist == null) {
-						System.out.println("Tourist not found.");
-						continue;
-					}
-					// trying to add tourist to line
-					try {
-                    ride.addToLine(tourist);
-					} catch( Exception e ) {
-						continue;
-					}
-					//sell the ticket
-					tourist.addVisit(new Ticket(ride.getName(), ride.getPrice(), new GregorianCalendar(), null));
-					
+					Tourist tourist = getTouristFromUser();
+					if (tourist == null) {continue;}
+					try {ride.addToLine(tourist);}
+					catch( Exception e ) {continue;}
 					break;
 				case 2:
-					//move the queue
-					if (ride.queue.isEmpty()) {
-						System.out.println("Queue is empty.");
-						continue;
-					}
+					ride.operate();
 					break;
 				case 3:
+					Tourist tourist1 = getTouristFromUser();
+					if (tourist1 == null) {continue;}
+					ride.removeFromQueue(tourist1);
 					break;
 				case 4:
+					ride.setOpen(false);
+					System.out.println("Ride " + ride.getName() + " is now closed.");
 					break;
 				case 5:
+					ride.setOpen(true);
+					System.out.println("Ride " + ride.getName() + " is now open.");
 					break;
 				case 6:
+					ride.printDetails();
 					break;
 				case 7:
+					ride.printQueue();
+					break;
+				case 8:
+					System.out.println("Exiting...");
 					return;
 				default:
 					System.out.println("Invalid choice.");
@@ -329,11 +261,54 @@ public class Main {
 			}
 		}
 	}
+	
 	public void receptionMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
 			break;
 		}
 	}
+	
+	private void setIsOpen(boolean b) {isOpen = b;}
+	
+	private Tourist getTouristFromUser() {
+		System.out.println("Please enter the tourist ID:");
+		String touristId = scanner.nextLine();
+		Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
+		if (tourist == null) {
+			System.out.println("Tourist not found.");
+			return null;
+		}
+		return tourist;
+	}
 
+	private void printAttractions() {
+		System.out.println("Attractions:");
+		for (Ride ride : attractions) {
+			System.out.println(ride.getName());
+		}
+	}
+
+	private Ride getRideFromUser() {
+		printAttractions();
+		System.out.println("Please enter the ride name:");
+		String rideName = scanner.nextLine();
+		for (Ride ride : attractions) {
+			if (ride.getName().equals(rideName)) {
+				return ride;
+			}
+		}
+		System.out.println("Ride not found.");
+		return null;
+	}
+
+	private GregorianCalendar getDateFromUser() {
+        System.out.println("Please enter the date (yyyy-mm-dd):");
+        String date = scanner.nextLine();
+        String[] dateParts = date.split("-");
+        int year = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]) - 1; // Month is 0-based in GregorianCalendar
+        int day = Integer.parseInt(dateParts[2]);
+        return new GregorianCalendar(year, month, day);
+    }
 }

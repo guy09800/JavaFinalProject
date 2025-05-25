@@ -70,7 +70,7 @@ public class Tourist extends Person {
 	public boolean isticketStackEmpty() {return ticketStack.isEmpty();}
 	
 	// method to add a visit to the stack
-	public void addVisit(Ticket ticket) {ticketStack.push(ticket);}
+	public void addToStack(Ticket ticket) {ticketStack.push(ticket);}
 	
 	
 	// method to remove a visit from the stack
