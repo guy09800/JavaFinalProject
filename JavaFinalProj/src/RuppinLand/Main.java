@@ -103,7 +103,7 @@ public class Main {
 			
 			Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(id));
 			if (employee != null) {
-				switch (employee.getdepartment()) {
+				switch (employee.getDepartment()) {
                     case "Management":
                     	ManagementMenu(employee);
                         break;
@@ -127,9 +127,124 @@ public class Main {
 
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
-		System.out.println("1. Print all tourists in the park today");
 		while (true) {
-			break;
+            System.out.println(
+                    "1. Add new ride\t\t\t\t\t7. Print all employees\n" +
+                    "2. Remove ride\t\t\t\t\t8. Print all tourists\n" +
+                    "3. Add new employee\t\t\t\t9. Move employee to another department\n" +
+                    "4. Remove employee\t\t\t\t10. How much money the park made today\n" +
+                    "5. Print all rides\t\t\t\t11. Exit\n" +
+                    "6. How many tourists visited today"
+                );
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.println("Please enter the ride name:");
+                    String rideName = scanner.nextLine();
+                    System.out.println("Please enter the ride type (RollerCoaster, FerrysWheel, HauntedHouse):");
+                    String rideType = scanner.nextLine();
+                    System.out.println("Please enter the minimum age:");
+                    int minAge = scanner.nextInt();
+                    System.out.println("Please enter the minimum height:");
+                    int minHeight = scanner.nextInt();
+                    System.out.println("Please enter the max capacity:");
+                    int maxCapacity = scanner.nextInt();
+                    System.out.println("Please enter the price:");
+                    int price = scanner.nextInt();
+                    scanner.nextLine();
+                    GregorianCalendar nextMaintenanceTime = new GregorianCalendar();
+                    nextMaintenanceTime.add(GregorianCalendar.MONTH, 1);
+					switch (rideType) {
+					case "RollerCoaster":
+						System.out.println("Please enter the speed:");
+						int speed = scanner.nextInt();
+						attractions.add(new RollerCoaster(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime, speed));
+						break;
+					case "FerrysWheel":
+						attractions.add(new FerrysWheel(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime));
+						break;
+					case "HauntedHouse":
+						System.out.println("Please enter the scare level:");
+						int scareLevel = scanner.nextInt();
+						attractions.add(new HauntedHouse(rideName, minAge, minHeight, maxCapacity,price, nextMaintenanceTime, scareLevel));
+						break;
+					default:
+						System.out.println("Invalid ride type.");
+					}
+                    break;
+                case 2:
+                	System.out.println("Please enter the ride name to remove:");
+                	String removeRideName = getRideFromUser().getName();
+                	for (Ride ride : attractions) {
+						if (ride.getName().equals(removeRideName)) {
+							ride.setOpen(false);
+							attractions.remove(ride);
+							System.out.println("Ride " + removeRideName + " has been removed.");
+							break;
+						}
+                	}
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                	printAttractions();
+                    break;
+                case 6:
+                	
+                    break;
+                case 7:
+                    System.out.println("Employees:");
+                    employeeTree.printAll();
+                case 8: 
+                	System.out.println("Tourists:");
+                	visitorsTree.printAll();
+                    break;
+                case 9:
+                    System.out.println("Please enter the employee ID to move:");
+                    String employeeID = scanner.nextLine();
+                    Employee employeeToMove = (Employee) employeeTree.searchPerson(Integer.parseInt(employeeID));
+					if (employeeToMove == null) {
+						System.out.println("Employee not found.");
+						break;
+					}
+					System.out.println("Please enter the new department (Management, Technician, Operator, Reception):");
+					String newDepartment = scanner.nextLine();
+					switch (newDepartment) {
+						case "Management":
+							employeeToMove.setDepartment("Management");
+							break;
+						case "Technician":
+							employeeToMove.setDepartment("Technician");
+							break;
+						case "Operator":
+							employeeToMove.setDepartment("Operator");
+							break;
+						case "Reception":
+							employeeToMove.setDepartment("Reception");
+							break;
+						default:
+							System.out.println("Invalid department.");
+					}
+                    break;
+                case 10:
+                	int totalMoney = 0;
+					for (Ride ride : attractions) {
+						totalMoney += ride.howMuchMoneyMadeToday();
+						System.out.println("Ride: " + ride.getName() + ", Made today: " + ride.howMuchMoneyMadeToday());
+					}
+					System.out.println("Total money made today: " + totalMoney);
+                    break;
+                case 11:	
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                	System.out.println("Invalid choice.");
+            }
 		}
 }
 
@@ -265,7 +380,39 @@ public class Main {
 	public void receptionMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
-			break;
+			System.out.println("Please choose an option:");
+			System.out.println("1. Sell ticket\t\t\t\t\t5. Close reception\n"
+					+ "2. Give parking ticket\t\t\t\t6. Print all tourists visited today\n"
+					+ "3. Print parking lot\t\t\t\t7. Exit\n" + "4. Open reception");
+            int choice = scanner.nextInt();
+			scanner.nextLine();
+			switch (choice) {
+			case 1:
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 4:
+				
+				break;
+			case 5:
+				
+				break;
+			case 6:
+				
+				break;
+			case 7:
+				System.out.println("Exiting...");
+				return;
+            default:
+            	System.out.println("Invalid choice.");
+            	break;
+			}
+			
 		}
 	}
 	

@@ -42,7 +42,7 @@ public class Manager extends Employee {
         StringBuilder sb = new StringBuilder();
         for (Employee e : employeeList) {
             sb.append("- ").append(e.getName())
-              .append(" (").append(e.getdepartment()).append(")\n");
+              .append(" (").append(e.getDepartment()).append(")\n");
         }
         return sb.toString();
     }

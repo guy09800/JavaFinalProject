@@ -26,8 +26,8 @@ public class Employee extends Person {
 	public double getSalary() {return salary;}
 	public void setSalary(double salary) {this.salary = salary;	}
 
-	public String getdepartment() {return department;}
-	public void setdepartment(String department) {this.department = department;}
+	public String getDepartment() {return department;}
+	public void setDepartment(String department) {this.department = department;}
 	
 	// Override of the abstract method from Person – 
 	// prints employee-specific details to the console

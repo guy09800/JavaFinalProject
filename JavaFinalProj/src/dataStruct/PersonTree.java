@@ -77,7 +77,7 @@ public class PersonTree {
 
 	    Employee employee = (Employee) node.getPerson(); // Safe cast since tree has only Employees
 	    
-	    if (employee.getdepartment().equalsIgnoreCase(departmentName)) {
+	    if (employee.getDepartment().equalsIgnoreCase(departmentName)) {
 	    	if (OneLine) {
 	        employee.printDetailsOneLine();
 	    	}

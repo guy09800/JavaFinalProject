@@ -161,4 +161,8 @@ public abstract class Ride{
 			System.out.println("Tourist " + tourist.getName() + " is not in the queue.");
 		}
     }
+    public int howMuchMoneyMadeToday() {
+    	return 0;
+    
+    }
 }
