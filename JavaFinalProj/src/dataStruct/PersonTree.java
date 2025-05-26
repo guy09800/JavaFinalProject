@@ -93,5 +93,41 @@ public class PersonTree {
 			printAllPerson(node.getRight());
 		}
 	}
+	
+	public void removePerson(int id) {
+		if (root == null) {
+			System.out.println("Tree is empty. Cannot remove person.");
+			return;
+		}
+		root = removePersonRec(root, id);
+	}
+
+	private TreeNode removePersonRec(TreeNode current, int id) {
+		if (current == null) {
+			System.out.println("Person with ID " + id + " not found.");
+			return null;
+		}
+		if (id < current.getPerson().getIdAsNum()) {
+			current.setLeft(removePersonRec(current.getLeft(), id));
+		} else if (id > current.getPerson().getIdAsNum()) {
+			current.setRight(removePersonRec(current.getRight(), id));
+		} else {
+			if (current.getLeft() == null) {
+				return current.getRight();
+			} else if (current.getRight() == null) {
+				return current.getLeft();
+			}
+			TreeNode minNode = findMin(current.getRight());
+			current.setPerson(minNode.getPerson());
+			current.setRight(removePersonRec(current.getRight(), minNode.getPerson().getIdAsNum()));
+		}
+		return current;
+	}
+	private TreeNode findMin(TreeNode right) {
+		while (right.getLeft() != null) {
+			right = right.getLeft();
+		}
+		return right;
+	}
 }
 

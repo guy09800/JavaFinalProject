@@ -190,13 +190,15 @@ public class Main {
                 	if (newEmployee != null) {employeeTree.addPerson(newEmployee);}
                     break;
                 case 4:
-                    
+                    Employee employeeToRemove = getEmployeeFromUser();
+                    if (employeeToRemove == null) {continue;}
+                    employeeTree.removePerson(employeeToRemove.getIdAsNum());
                     break;
                 case 5:
                 	printAttractions();
                     break;
                 case 6:
-                	
+                	receptionists.printAllTouristToday();
                     break;
                 case 7:
                     System.out.println("Employees:");
@@ -461,4 +463,15 @@ public class Main {
         int day = Integer.parseInt(dateParts[2]);
         return new GregorianCalendar(year, month, day);
     }
+	
+	private Employee getEmployeeFromUser() {
+		System.out.println("Please enter the employee ID:");
+		String employeeId = scanner.nextLine();
+		Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(employeeId));
+		if (employee == null) {
+			System.out.println("Employee not found.");
+			return null;
+		}
+		return employee;
+	}
 }
