@@ -18,14 +18,20 @@ public class Main {
     private PersonTree visitorsTree;
     private boolean isOpen;
     private static LinkedList<Ride> attractions;
-    private static List<Object> departments;
     private static Scanner scanner = new Scanner(System.in);
+    private Technician technicians;
+    private Operator operators;
+    private Reception receptionists;
+    private Management managements;
     
 	public Main() {
 		this.employeeTree = new PersonTree();
 		this.visitorsTree = new PersonTree();
 		this.attractions = new LinkedList<>();
-		this.departments = new LinkedList<>();
+		this.technicians = new Technician("Technician");
+		this.operators = new Operator("Operator");
+		this.receptionists = new Reception("Reception");
+		this.managements =new Management("Management");
 		this.isOpen = false;
 	}
 
@@ -33,11 +39,6 @@ public class Main {
 		
 		Main main = new Main();
 		main.setIsOpen(true);
-	    // Add departments to the list
-	    departments.add(new Technician("Technician"));
-	    departments.add(new Operator("Operator"));
-	    departments.add(new Reception("Reception"));
-	    departments.add(new Management("Management"));
 		// create new 6 attractions:
 		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 8));
 		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 5));
@@ -346,6 +347,7 @@ public class Main {
 					break;
 				case 2:
 					ride.operate();
+					
 					break;
 				case 3:
 					Tourist tourist1 = getTouristFromUser();
@@ -379,33 +381,37 @@ public class Main {
 	
 	public void receptionMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
+		
 		while (true) {
-			System.out.println("Please choose an option:");
-			System.out.println("1. Sell ticket\t\t\t\t\t5. Close reception\n"
-					+ "2. Give parking ticket\t\t\t\t6. Print all tourists visited today\n"
-					+ "3. Print parking lot\t\t\t\t7. Exit\n" + "4. Open reception");
+			System.out.println(
+				    "Please choose an option:\n" +
+				    "1. Sell ticket\t\t\t4. Print all tourists visited today\n" +
+				    "2. Give parking ticket\t\t5. Exit\n" +
+				    "3. Print parking lot"
+				);
             int choice = scanner.nextInt();
 			scanner.nextLine();
 			switch (choice) {
 			case 1:
-				
+				Tourist tourist = getTouristFromUser();
+				if (tourist == null) {receptionists.registerTourist(visitorsTree);}
+				receptionists.sellTicket(tourist);
 				break;
 			case 2:
-				
+				Tourist tourist1 = getTouristFromUser();
+				if (tourist1 == null) {
+					System.out.println("Tourist not found.");
+					continue;
+				}
+				Reception.outOfThePark(tourist1);
 				break;
 			case 3:
-				
+				receptionists.printParkingLot();;
 				break;
 			case 4:
-				
+				receptionists.printAllTouristToday();
 				break;
 			case 5:
-				
-				break;
-			case 6:
-				
-				break;
-			case 7:
 				System.out.println("Exiting...");
 				return;
             default:

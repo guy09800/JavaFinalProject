@@ -17,8 +17,6 @@ int speedLevel ;
 	    this.speedLevel = speedLevel;
 	}
 	
-	public int getSpeedLevel() {
-	    return speedLevel;
-	}
+	public int getSpeedLevel() {return speedLevel;}
 }
 

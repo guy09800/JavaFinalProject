@@ -66,9 +66,6 @@ public class PersonTree {
 	    printByDepartmentRec(root, departmentName.trim(), OneLine); 
 	}
 	    
-
-	
-	// In-Order Traversal :
 	private void printByDepartmentRec(TreeNode node, String departmentName, boolean OneLine) { 
 	    
 		if (node == null) return;

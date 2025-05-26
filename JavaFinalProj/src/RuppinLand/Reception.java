@@ -6,46 +6,48 @@ import personClass.Employee;
 import personClass.Tourist;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Reception implements department {
 
     private String name;
-
+    private static LinkedList<Ticket> enterys = new LinkedList<Ticket>();
+    private Tourist [][] parkingLot;
+    
     public Reception(String name) {
         this.name = name;
+        this.parkingLot = new Tourist[10][10];
     }
-
+    
+	public Reception(String name, int rows, int columns) {
+		this.name = name;
+		parkingLot = new Tourist[rows][columns];
+		
+	}
+	
     @Override
-    public String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     @Override
 	public void printDetails(PersonTree employeeTree) {
     	
 	    System.out.println(this.name + " Department - Full Employee Details:");
-	    
 	    boolean OneLine = false; 
-	    
 	    employeeTree.printByDepartment(this.name,OneLine);
-	    
 	}
 
 	@Override
 	public void printDetailsOneLine(PersonTree employeeTree) {
 		
 	    System.out.println(this.name + " Department - One-Line Employee Summaries:");
-	    
-	    boolean OneLine = true;
-	    
+	    boolean OneLine = true;	    
 	    employeeTree.printByDepartment(this.name,OneLine);
 	    
 	}
 	
     @Override
     public void handleCustomer(Tourist tourist, Ride ride) {
-    	
         System.out.println("Reception is registering the tourist " + tourist.getName() + ".");
     }
     
@@ -169,4 +171,18 @@ public class Reception implements department {
     public void openRide(Ride ride) {
         ride.setOpen(true);
     }
+    
+	public static void outOfThePark(Tourist tourist) {
+	}
+	public void printParkingLot() {
+	
+	}
+
+	public void sellTicket(Tourist tourist) {
+		
+	}
+	public void printAllTouristToday() {
+		
+	}
 }
+

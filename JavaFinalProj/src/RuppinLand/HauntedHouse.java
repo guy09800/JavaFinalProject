@@ -19,8 +19,6 @@ public class HauntedHouse extends Ride{
 		this.scareLevel = scareLevel;
 	}
 
-	public int getScareLevel() {
-		return scareLevel;
-	}
+	public int getScareLevel() {return scareLevel;}
 
 }
