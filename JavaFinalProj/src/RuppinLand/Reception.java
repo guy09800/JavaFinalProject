@@ -172,7 +172,7 @@ public class Reception implements department {
         ride.setOpen(true);
     }
     
-	public static void outOfThePark(Tourist tourist) {
+	public void outOfThePark(Tourist tourist) {
 	}
 	public void printParkingLot() {
 	

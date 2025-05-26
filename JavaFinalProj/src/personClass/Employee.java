@@ -3,6 +3,8 @@ package personClass;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import dataStruct.PersonTree;
+
 public class Employee extends Person {
 	private String department;
 	private double salary;
@@ -36,4 +38,7 @@ public class Employee extends Person {
 				+ getBirthday().get(Calendar.DAY_OF_MONTH) + "/" + (getBirthday().get(Calendar.MONTH) + 1) + "/"
 				+ getBirthday().get(Calendar.YEAR) + ", department: " + department + ", Salary: " + salary);
     }
+	public static Employee createEmployee(PersonTree tree) {
+		return null;
+	}
 }

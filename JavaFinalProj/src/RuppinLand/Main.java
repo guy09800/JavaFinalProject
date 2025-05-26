@@ -90,7 +90,6 @@ public class Main {
 	
 	public void mainMenu () {
 		while (true) {
-		
 			System.out.println("Hello Employee, Please enter your ID or 0 to exit the system:");
 			String id = scanner.nextLine();
 			if (id.equals("0")) {
@@ -187,7 +186,8 @@ public class Main {
                 	}
                     break;
                 case 3:
-                    
+                	Employee newEmployee = Employee.createEmployee(employeeTree);
+                	if (newEmployee != null) {employeeTree.addPerson(newEmployee);}
                     break;
                 case 4:
                     
@@ -324,57 +324,54 @@ public class Main {
 	
 	public void operatorMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
-		while (true) {
-			Ride ride = getRideFromUser();
-			if (ride == null) {continue;}
-			
-			while(true)
-			{
-				System.out.println(
-					    "1. Sell ticket\t\t\t\t\t5. Open ride\n" +
-					    "2. Move the queue and start the attraction\t6. Get ride details\n" +
-					    "3. Get out person from the queue\t\t7. Print all tourists in the queue\n" +
-					    "4. Close ride\t\t\t\t\t8. Exit"
-					);
-				int choice = scanner.nextInt();
-				scanner.nextLine();
-				switch (choice) {
-				case 1:
-					Tourist tourist = getTouristFromUser();
-					if (tourist == null) {continue;}
-					try {ride.addToLine(tourist);}
-					catch( Exception e ) {continue;}
-					break;
-				case 2:
-					ride.operate();
-					
-					break;
-				case 3:
-					Tourist tourist1 = getTouristFromUser();
-					if (tourist1 == null) {continue;}
-					ride.removeFromQueue(tourist1);
-					break;
-				case 4:
-					ride.setOpen(false);
-					System.out.println("Ride " + ride.getName() + " is now closed.");
-					break;
-				case 5:
-					ride.setOpen(true);
-					System.out.println("Ride " + ride.getName() + " is now open.");
-					break;
-				case 6:
-					ride.printDetails();
-					break;
-				case 7:
-					ride.printQueue();
-					break;
-				case 8:
-					System.out.println("Exiting...");
-					return;
-				default:
-					System.out.println("Invalid choice.");
-					break;
-				}
+		Ride ride = getRideFromUser();
+		if (ride == null) {return;}
+		while(true)
+		{
+			System.out.println(
+				    "1. Sell ticket\t\t\t\t\t5. Open ride\n" +
+				    "2. Move the queue and start the attraction\t6. Get ride details\n" +
+				    "3. Get out person from the queue\t\t7. Print all tourists in the queue\n" +
+				    "4. Close ride\t\t\t\t\t8. Exit"
+				);
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			switch (choice) {
+			case 1:
+				Tourist tourist = getTouristFromUser();
+				if (tourist == null) {continue;}
+				try {ride.addToLine(tourist);}
+				catch( Exception e ) {continue;}
+				break;
+			case 2:
+				ride.operate();
+				break;
+			case 3:
+				Tourist tourist1 = getTouristFromUser();
+				if (tourist1 == null) {continue;}
+				ride.removeFromQueue(tourist1);
+				break;
+			case 4:
+				ride.setOpen(false);
+				System.out.println("Ride " + ride.getName() + " is now closed.");
+				break;
+			case 5:
+				ride.setOpen(true);
+				System.out.println("Ride " + ride.getName() + " is now open.");
+				break;
+			case 6:
+				ride.printDetails();
+				break;
+			case 7:
+				ride.printQueue();
+				break;
+			case 8:
+				System.out.println("Exiting...");
+				return;
+			default:
+				System.out.println("Invalid choice.");
+				break;
+				
 			}
 		}
 	}
@@ -403,10 +400,10 @@ public class Main {
 					System.out.println("Tourist not found.");
 					continue;
 				}
-				Reception.outOfThePark(tourist1);
+				receptionists.outOfThePark(tourist1);
 				break;
 			case 3:
-				receptionists.printParkingLot();;
+				receptionists.printParkingLot();
 				break;
 			case 4:
 				receptionists.printAllTouristToday();
