@@ -175,7 +175,16 @@ public class Reception implements department {
 	public void outOfThePark(Tourist tourist) {
 	}
 	public void printParkingLot() {
-	
+	    System.out.println("=== Parking Lot ===");
+	    for (int i = 0; i < parkingLot.length; i++) {
+	        for (int j = 0; j < parkingLot[i].length; j++) {
+	            Tourist t = parkingLot[i][j];
+	            String name = (t != null) ? t.getName() : "Empty";
+	            System.out.printf("| %-10s", name);
+	        }
+	        System.out.println("|");
+	    }
+	    System.out.println("===================");
 	}
 
 	public void sellTicket(Tourist tourist) {

@@ -61,16 +61,16 @@ public class Main {
 		ticketStack3.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
 		ticketStack3.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
 		// create new 10 tourists:
-		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 1.75).setticketStack(ticketStack1));
-		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 1.80).setticketStack(ticketStack2));
-		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 1.65).setticketStack(ticketStack3));
-		main.visitorsTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 1.70));
-		main.visitorsTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 1.60));
-		main.visitorsTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 1.85));
-		main.visitorsTree.addPerson(new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 1.55));
-		main.visitorsTree.addPerson(new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 1.90));
-		main.visitorsTree.addPerson(new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 1.50));
-		main.visitorsTree.addPerson(new Tourist("10", "Judy", new GregorianCalendar(1955, 10, 10), 1.95));
+		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 175).setticketStack(ticketStack1));
+		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 180).setticketStack(ticketStack2));
+		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 165).setticketStack(ticketStack3));
+		main.visitorsTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 170));
+		main.visitorsTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 160));
+		main.visitorsTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 185));
+		main.visitorsTree.addPerson(new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 155));
+		main.visitorsTree.addPerson(new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 190));
+		main.visitorsTree.addPerson(new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 185));
+		main.visitorsTree.addPerson(new Tourist("318265378", "Idan", new GregorianCalendar(1997, 10, 3), 105));
 		// create 10 employees:
 		main.employeeTree.addPerson(new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Management", 100));
 		main.employeeTree.addPerson(new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Reception", 80));
@@ -341,9 +341,17 @@ public class Main {
 			switch (choice) {
 			case 1:
 				Tourist tourist = getTouristFromUser();
-				if (tourist == null) {continue;}
+				
+				if (tourist == null) {
+					System.out.println("Tourist not found.");
+					continue;
+					}
 				try {ride.addToLine(tourist);}
-				catch( Exception e ) {continue;}
+				catch( Exception e ) {
+					System.out.println("Error: " + e.getMessage());
+					continue;
+					}
+
 				break;
 			case 2:
 				ride.operate();

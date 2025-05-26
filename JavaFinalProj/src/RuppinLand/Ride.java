@@ -3,6 +3,7 @@ import personClass.*;
 import java.util.GregorianCalendar;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.LinkedList;
 
 
 
@@ -23,6 +24,7 @@ public abstract class Ride{
 		setMaxCapacity(maxCapacity);
 		setPrice(price);
 		setNextMaintenanceTime(nextMaintenanceTime);
+		this.queue = new LinkedList<Tourist>();
 	}
 	
 	public void setName(String name) {
@@ -38,17 +40,29 @@ public abstract class Ride{
 	}
 
 	public int getMaxCapacity() {return maxCapacity;}
-	public void  printQueue() {// print function GUY
-		
+	public void  printQueue() {
+		if (queue.isEmpty()) {
+			System.out.println("Queue is empty.");
+		} else {
+			System.out.print(name + " Queue: ");
+			for (Tourist tourist : queue) {
+				System.out.print(tourist.getName() + " <- ");
+			}
+			System.out.println("end (" + queue.size() + " tourists in queue)");
+		}
 	}
 
 	public void setQueue(Queue<Tourist> queue) {
-		if (queue == null) {throw new IllegalArgumentException("Queue cannot be null");}
+		if (queue == null) {
+			throw new IllegalArgumentException("Queue cannot be null");
+		}
 		this.queue = queue;
 	}
 
 	public void setMinAge(int minAge) {
-		if (minAge < 0) {throw new IllegalArgumentException("Minimum age cannot be negative");}
+		if (minAge < 0) {
+			throw new IllegalArgumentException("Minimum age cannot be negative");
+		}
 		this.minAge = minAge;
 	}
 
@@ -77,7 +91,19 @@ public abstract class Ride{
 	}
 
 	public boolean isOpen() {return isOpen;}
-	public void setOpen(boolean isOpen) {this.isOpen = isOpen;}
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
+		if (!isOpen) {
+            //for each tourist in the queue, remove them and delete his last ticket in the stack
+			while (!queue.isEmpty()) {
+				Tourist tourist = queue.remove();
+                if (!tourist.getticketStack().isEmpty()) {
+                    tourist.getticketStack().pop();
+                    System.out.println("Removed ticket for " + tourist.getName() + " as the ride is closed.");
+                }
+			}
+		}
+    }
 	public int getPrice() {return price;}
 
 	public void setPrice(int price) {
@@ -98,10 +124,17 @@ public abstract class Ride{
 		// check if visitor is already at the queue
 		if (queue.contains(tourist))
 			throw new Exception("Visitor is already in queue...");
+		// check if queue is full
+		if (queue.size() >= maxCapacity)
+			throw new Exception("Queue is full, cannot add tourist " + tourist.getName() + " to ride " + getName() + ".");
+		// check if the top ticket in the tourist's stack is null if it is that mean he stand in other ride queue
+		if (!tourist.getticketStack().isEmpty() && tourist.getticketStack().peek() == null )
+			throw new Exception("Tourist " + tourist.getName() + " stand in another ride queue");
 		//adding to queue
-		if (queue.add(tourist))
-			System.out.println("Visitor has been added to queue");	
-		}
+		queue.add(tourist);
+		System.out.println("Visitor has been added to queue");
+		return;
+	}
 
 	public void operate(){
 		
@@ -121,6 +154,10 @@ public abstract class Ride{
 		if (queue.contains(tourist)) {
 			queue.remove(tourist);
 			System.out.println("Tourist " + tourist.getName() + " has been removed from the queue.");
+			if (!tourist.getticketStack().isEmpty()) {
+				tourist.getticketStack().pop();
+				System.out.println("Ticket for " + tourist.getName() + " has been removed from their stack.");
+			}
 		} else {
 			System.out.println("Tourist " + tourist.getName() + " is not in the queue.");
 		}
