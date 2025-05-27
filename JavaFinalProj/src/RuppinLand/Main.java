@@ -48,24 +48,10 @@ public class Main {
 		attractions.add(new FerrysWheel("Sky Wheel", 6, 110, 12, 25, new GregorianCalendar(2024, 8, 20)));
 		attractions.add(new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 1));
 		attractions.add(new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 2));
-		//create 3 ticket stacks for the attractions:
-		Stack<Ticket> ticketStack1 = new Stack<>();
-		Stack<Ticket> ticketStack2 = new Stack<>();
-		Stack<Ticket> ticketStack3 = new Stack<>();
-		// add to the stack tickets:
-		ticketStack1.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack1.add(new Ticket("Sky Wheel", 20, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack1.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
-		ticketStack2.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack2.add(new Ticket("Giant Wheel", 25, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack2.add(new Ticket("Scary Mansion", 60, new GregorianCalendar(), null));
-		ticketStack3.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack3.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack3.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
 		// create new 10 tourists:
-		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 175).setticketStack(ticketStack1));
-		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 180).setticketStack(ticketStack2));
-		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 165).setticketStack(ticketStack3));
+		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 175));
+		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 180));
+		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 165));
 		main.visitorsTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 170));
 		main.visitorsTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 160));
 		main.visitorsTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 185));
@@ -357,7 +343,6 @@ public class Main {
 					System.out.println("Error: " + e.getMessage());
 					continue;
 					}
-
 				break;
 			case 2:
 				try {

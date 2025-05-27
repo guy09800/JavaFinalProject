@@ -132,6 +132,8 @@ public abstract class Ride{
 			throw new Exception("Tourist " + tourist.getName() + " stand in another ride queue");
 		//adding to queue
 		queue.add(tourist);
+		//adding ticket to stack
+		tourist.addToStack(new Ticket (tourist, this, new GregorianCalendar()));
 		System.out.println("Visitor has been added to queue");
 		return;
 	}
@@ -139,11 +141,9 @@ public abstract class Ride{
 	public void operate() throws Exception{
 		if (queue.isEmpty())
 				throw new Exception("Queue is empty, no tourists to move forward");
-			
 		for (int i = 0; i <= maxCapacity && !queue.isEmpty(); i++) {
-			Tourist tourist =queue.remove();
-			Ticket ticket = tourist.getticketStack().peek();
-			ticket.setPlayDateTime(new GregorianCalendar());
+			Tourist tourist =queue.poll();
+			tourist.getticketStack().peek().setPlayDateTime(new GregorianCalendar());
 		}
 	}
 	
