@@ -78,6 +78,7 @@ public class Main {
 	
 	public void mainMenu () {
 		while (true) {
+			System.out.println("=======================================");
 			System.out.println("Hello Employee, Please enter your ID or 0 to exit the system:");
 			String id = scanner.nextLine();
 			if (id.equals("")) {continue;}
@@ -112,18 +113,21 @@ public class Main {
 				System.out.println("Employee not found.");
 			}
 		}
+		
 	}
 
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
             System.out.println(
+            		"=======================================================================\n"+
                     "1. Add new ride\t\t\t\t\t7. Print all employees\n" +
                     "2. Remove ride\t\t\t\t\t8. Print all tourists\n" +
                     "3. Add new employee\t\t\t\t9. Move employee to another department\n" +
                     "4. Remove employee\t\t\t\t10. How much money the park made today\n" +
                     "5. Print all rides\t\t\t\t11. Show Stats\n" +
-                    "6. Print all tourists in the park now\n12. Exit\n"
+                    "6. Print all tourists in the park now\n12. Exit\n"+
+                    "=======================================================================\n"
                 );
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -253,10 +257,12 @@ public class Main {
 			while(true)
 			{
 				System.out.println(
+						"=======================================================================\n"+
 					    "1. Open ride\t4. Get ride details\n" +
 					    "2. Close ride\t5. Get complaint from tourist\n" +
 					    "3. Fix ride\t6. Print All Rides next maintenance time\n" +
-					    "7. Exit"
+					    "7. Exit\n"+
+					    "=======================================================================\n"
 					);
 				
                 int choice = scanner.nextInt();
@@ -324,10 +330,12 @@ public class Main {
 		while(true)
 		{
 			System.out.println(
+					"=======================================================================\n"+
 				    "1. Sell ticket\t\t\t\t\t5. Open ride\n" +
 				    "2. Move the queue and start the attraction\t6. Get ride details\n" +
 				    "3. Get out person from the queue\t\t7. Print all tourists in the queue\n" +
-				    "4. Close ride\t\t\t\t\t8. Exit"
+				    "4. Close ride\t\t\t\t\t8. Exit\n"+
+				    "=======================================================================\n"
 				);
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -393,10 +401,12 @@ public class Main {
 		
 		while (true) {
 			System.out.println(
+					"=======================================================================\n"+
 				    "Please choose an option:\n" +
 				    "1. Sell ticket\t\t\t4. Print all tourists in the park now\n" +
 				    "2. Give parking ticket\t\t5. Exit\n" +
-				    "3. Print parking lot"
+				    "3. Print parking lot\n"+
+				    "=======================================================================\n"
 				);
             int choice = scanner.nextInt();
 			scanner.nextLine();
