@@ -118,8 +118,8 @@ public class Tourist extends Person {
 		return parkingPlace;
 	}
 
-	public void setParkingPlace(int[] parkingPlace) {
-		
+	public void setParkingPlace(int row, int col) {
+		this.parkingPlace = new int[] {row, col};
 	}
 
 }

@@ -129,5 +129,16 @@ public class PersonTree {
 		}
 		return right;
 	}
+
+	public int getSize() {
+		return getSizeRec(root);
+	}
+
+	private int getSizeRec(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		return 1 + getSizeRec(node.getLeft()) + getSizeRec(node.getRight());
+	}
 }
 

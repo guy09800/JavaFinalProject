@@ -135,8 +135,8 @@ public class Main {
                     "2. Remove ride\t\t\t\t\t8. Print all tourists\n" +
                     "3. Add new employee\t\t\t\t9. Move employee to another department\n" +
                     "4. Remove employee\t\t\t\t10. How much money the park made today\n" +
-                    "5. Print all rides\t\t\t\t11. Exit\n" +
-                    "6. How many tourists visited today"
+                    "5. Print all rides\t\t\t\t11. Show Stats\n" +
+                    "6. Print all tourists in the park now\n12. Exit\n"
                 );
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -205,6 +205,7 @@ public class Main {
                 case 7:
                     System.out.println("Employees:");
                     employeeTree.printAll();
+                    break;
                 case 8: 
                 	System.out.println("Tourists:");
                 	visitorsTree.printAll();
@@ -244,7 +245,10 @@ public class Main {
 					}
 					System.out.println("Total money made today: " + totalMoney);
                     break;
-                case 11:	
+                case 11:
+                	showStats();
+                	break;
+                case 12:	
                     System.out.println("Exiting...");
                     return;
                 default:
@@ -403,7 +407,7 @@ public class Main {
 			switch (choice) {
 			case 1:
 				Tourist tourist = getTouristFromUser();
-				if (tourist == null) {receptionists.registerTourist(visitorsTree);}
+				if (tourist == null) {visitorsTree = receptionists.registerTourist(visitorsTree);}
 				receptionists.sellTicket(tourist);
 				break;
 			case 2:
@@ -483,5 +487,16 @@ public class Main {
 			return null;
 		}
 		return employee;
+	}
+	private void showStats() {
+        System.out.println("==========================================================");
+		System.out.println("Number of rides: " + attractions.size());
+		System.out.println("Number of tourists in the system: " + visitorsTree.getSize());
+		System.out.println("Number of employees in the system: " + employeeTree.getSize());
+		System.out.println("Money made today by each ride:");
+		for (Ride ride : attractions) {
+			System.out.println(ride.getName() + ": " + ride.howMuchMoneyMadeToday());
+		}
+		System.out.println("==========================================================");
 	}
 }
