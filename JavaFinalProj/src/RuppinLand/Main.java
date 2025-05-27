@@ -417,7 +417,7 @@ public class Main {
 			switch (choice) {
 			case 1:
 				Tourist tourist = getTouristFromUser();
-				if (tourist == null) {visitorsTree = receptionists.registerTourist(visitorsTree);}
+				if (tourist == null) {tourist = receptionists.registerTourist(visitorsTree);}
 				receptionists.sellTicket(tourist);
 				break;
 			case 2:

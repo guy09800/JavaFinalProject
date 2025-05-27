@@ -14,8 +14,8 @@ public class Reception implements department {
     private String name;
     private int TouristInPark = 0;
     private static LinkedList<Ticket> enterys = new LinkedList<Ticket>();
-    private Tourist [][] parkingLot = new Tourist[20][20];
-    private Tourist [] touristsVisitedToday;
+    private Tourist [][] parkingLot = new Tourist[10][10];
+    private Tourist [] touristsVisitedToday = new Tourist[0];
     private int totalMoneyToday = 0;
     private int price;
     
@@ -57,7 +57,7 @@ public class Reception implements department {
         System.out.println("Reception is registering the tourist " + tourist.getName() + ".");
     }
     
-    public PersonTree registerTourist(PersonTree visitorsTree) {
+    public Tourist registerTourist(PersonTree visitorsTree) {
 		Scanner scanner  = new Scanner(System.in);
 
 		String id;
@@ -183,7 +183,7 @@ public class Reception implements department {
 		Tourist newTourist = new Tourist(id, name, new GregorianCalendar(year, month, day), height);
 		visitorsTree.addPerson(newTourist);
 		System.out.println("Tourist registered successfully.");
-		return visitorsTree;
+		return newTourist;
     }   
     public void addEmployee(PersonTree employeeTree) {
     	
@@ -287,7 +287,7 @@ public class Reception implements department {
 	        System.out.printf("[%2d] ", i);
 	        for (int j = 0; j < parkingLot[i].length; j++) {
 	            Tourist t = parkingLot[i][j];
-	            String name = (t != null) ? t.getName() : "Empty";
+	            String name = (t != null) ? t.getName() : "-";
 	            System.out.printf("| %-7s ", name);
 	        }
 	        System.out.println("|");
@@ -301,10 +301,15 @@ public class Reception implements department {
 			throw new IllegalArgumentException("Tourist cannot be null.");
 		}
 		TouristInPark++;
+		if (touristsVisitedToday.length == 0) {
+			touristsVisitedToday = new Tourist[] { tourist };
+		}
+		else {
 		Tourist [] newTouristsVisitedToday = new Tourist[touristsVisitedToday.length + 1];
 		System.arraycopy(touristsVisitedToday, 0, newTouristsVisitedToday, 0, touristsVisitedToday.length);
 		newTouristsVisitedToday[touristsVisitedToday.length-1] = tourist;
 		touristsVisitedToday = newTouristsVisitedToday;
+		}
 		totalMoneyToday += price;
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Does " + tourist.getName() + " have a car? (yes/no)");
