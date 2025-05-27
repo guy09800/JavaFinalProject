@@ -12,19 +12,18 @@ import java.util.Scanner;
 public class Reception implements department {
 
     private String name;
+    private int TouristInPark = 0;
     private static LinkedList<Ticket> enterys = new LinkedList<Ticket>();
-    private Tourist [][] parkingLot;
+    private Tourist [][] parkingLot = new Tourist[20][20];
+    private Tourist [] touristsVisitedToday;
+    private int totalMoneyToday = 0;
+    private int price;
     
-    public Reception(String name) {
+    public Reception(String name, int price) {
         this.name = name;
-        this.parkingLot = new Tourist[10][10];
+        this.price = price;
     }
-    
-	public Reception(String name, int rows, int columns) {
-		this.name = name;
-		parkingLot = new Tourist[rows][columns];
-		
-	}
+
 	
     @Override
     public String getName() {return name;}
@@ -37,6 +36,13 @@ public class Reception implements department {
 	    employeeTree.printByDepartment(this.name,OneLine);
 	}
 
+	public int getTouristInPark() {
+		return TouristInPark;
+	}
+
+	public void setTouristInPark(int touristInPark) {
+		TouristInPark = touristInPark;
+	}
 	@Override
 	public void printDetailsOneLine(PersonTree employeeTree) {
 		
@@ -173,6 +179,7 @@ public class Reception implements department {
     }
     
 	public void outOfThePark(Tourist tourist) {
+		TouristInPark--;
 	}
 	public void printParkingLot() {
 	    System.out.println("=== Parking Lot ===");
@@ -189,8 +196,17 @@ public class Reception implements department {
 
 	public void sellTicket(Tourist tourist) {
 		
+		
+		TouristInPark++;
+		Tourist [] newTouristsVisitedToday = new Tourist[touristsVisitedToday.length + 1];
+		System.arraycopy(touristsVisitedToday, 0, newTouristsVisitedToday, 0, touristsVisitedToday.length);
+		newTouristsVisitedToday[touristsVisitedToday.length-1] = tourist;
+		touristsVisitedToday = newTouristsVisitedToday;
+		totalMoneyToday += price;
+		
+		
 	}
-	public void printAllTouristToday() {
+	public void printAllTouristInThePark() {
 		
 	}
 }

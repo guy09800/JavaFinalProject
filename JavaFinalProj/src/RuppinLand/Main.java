@@ -23,6 +23,7 @@ public class Main {
     private Operator operators;
     private Reception receptionists;
     private Management managements;
+    private static LinkedList<DaySummary> DaysSummary;
     
 	public Main() {
 		this.employeeTree = new PersonTree();
@@ -30,9 +31,10 @@ public class Main {
 		this.attractions = new LinkedList<>();
 		this.technicians = new Technician("Technician");
 		this.operators = new Operator("Operator");
-		this.receptionists = new Reception("Reception");
+		this.receptionists = new Reception("Reception", 100);
 		this.managements =new Management("Management");
 		this.isOpen = false;
+		this.DaysSummary = new LinkedList<>();
 	}
 
 	public static void main(String[] args) {
@@ -198,7 +200,7 @@ public class Main {
                 	printAttractions();
                     break;
                 case 6:
-                	receptionists.printAllTouristToday();
+                	receptionists.printAllTouristInThePark();
                     break;
                 case 7:
                     System.out.println("Employees:");
@@ -392,7 +394,7 @@ public class Main {
 		while (true) {
 			System.out.println(
 				    "Please choose an option:\n" +
-				    "1. Sell ticket\t\t\t4. Print all tourists visited today\n" +
+				    "1. Sell ticket\t\t\t4. Print all tourists in the park now\n" +
 				    "2. Give parking ticket\t\t5. Exit\n" +
 				    "3. Print parking lot"
 				);
@@ -416,7 +418,7 @@ public class Main {
 				receptionists.printParkingLot();
 				break;
 			case 4:
-				receptionists.printAllTouristToday();
+				receptionists.printAllTouristInThePark();
 				break;
 			case 5:
 				System.out.println("Exiting...");

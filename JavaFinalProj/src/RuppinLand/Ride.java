@@ -13,6 +13,7 @@ public abstract class Ride{
 	int minHeight;
 	int maxCapacity;
 	int price;
+	int totalMoneyMadeToday = 0;
 	Queue<Tourist> queue;
 	GregorianCalendar nextMaintenanceTime;
 	boolean isOpen = false;
@@ -133,6 +134,7 @@ public abstract class Ride{
 		//adding to queue
 		queue.add(tourist);
 		System.out.println("Visitor has been added to queue");
+		totalMoneyMadeToday += price;
 		return;
 	}
 
@@ -157,6 +159,7 @@ public abstract class Ride{
 			if (!tourist.getticketStack().isEmpty()) {
 				tourist.getticketStack().pop();
 				System.out.println("Ticket for " + tourist.getName() + " has been removed from their stack.");
+				totalMoneyMadeToday -= price;
 			}
 		} else {
 			System.out.println("Tourist " + tourist.getName() + " is not in the queue.");
