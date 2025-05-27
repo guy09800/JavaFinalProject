@@ -13,7 +13,6 @@ public abstract class Ride{
 	int minHeight;
 	int maxCapacity;
 	int price;
-	int totalMoneyMadeToday = 0;
 	Queue<Tourist> queue;
 	GregorianCalendar nextMaintenanceTime;
 	boolean isOpen = false;
@@ -134,20 +133,20 @@ public abstract class Ride{
 		//adding to queue
 		queue.add(tourist);
 		System.out.println("Visitor has been added to queue");
-		totalMoneyMadeToday += price;
 		return;
 	}
 
-	public void operate(){
-		
+	public void operate() throws Exception{
 		if (queue.isEmpty())
-				System.out.println("Queue is empty, no tourists to move forward");
+				throw new Exception("Queue is empty, no tourists to move forward");
 			
 		for (int i = 0; i <= maxCapacity; i++) {
+			if (queue.isEmpty()) {
 				 Tourist tourist =queue.remove();
 				 Ticket ticket = tourist.getticketStack().peek();
 				 ticket.setPlayDateTime(new GregorianCalendar());
 		}
+	}
 	}
     public void removeFromQueue(Tourist tourist) {
         if (tourist == null) {
@@ -159,7 +158,6 @@ public abstract class Ride{
 			if (!tourist.getticketStack().isEmpty()) {
 				tourist.getticketStack().pop();
 				System.out.println("Ticket for " + tourist.getName() + " has been removed from their stack.");
-				totalMoneyMadeToday -= price;
 			}
 		} else {
 			System.out.println("Tourist " + tourist.getName() + " is not in the queue.");
@@ -169,4 +167,15 @@ public abstract class Ride{
     	return 0;
     
     }
+    public void scene() throws Exception{
+    	throw new Exception("This is The Super Object Ride!");
+    }
+  public  void printLine(String text) throws Exception{// for printing scene lines with sleep time
+	  System.out.println(text);
+	  Thread.sleep(1000);
+	  for (int i = 0; i <= 2; i++) {
+	    System.out.println(".");
+	    Thread.sleep(500);
+     }
+  }
 }

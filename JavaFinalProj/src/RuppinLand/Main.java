@@ -360,7 +360,18 @@ public class Main {
 
 				break;
 			case 2:
-				ride.operate();
+				try {
+					ride.operate();
+				} catch (Exception e) {
+					System.out.println("Error: " + e.getMessage());
+					continue;
+				}
+				System.out.println("Ride " + ride.getName() + " has been operated.");
+				try {ride.scene();}
+				catch (Exception e) {
+					System.out.println("Error: " + e.getMessage());
+					continue;
+				}
 				break;
 			case 3:
 				Tourist tourist1 = getTouristFromUser();
