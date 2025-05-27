@@ -140,14 +140,13 @@ public abstract class Ride{
 		if (queue.isEmpty())
 				throw new Exception("Queue is empty, no tourists to move forward");
 			
-		for (int i = 0; i <= maxCapacity; i++) {
-			if (queue.isEmpty()) {
-				 Tourist tourist =queue.remove();
-				 Ticket ticket = tourist.getticketStack().peek();
-				 ticket.setPlayDateTime(new GregorianCalendar());
+		for (int i = 0; i <= maxCapacity && !queue.isEmpty(); i++) {
+			Tourist tourist =queue.remove();
+			Ticket ticket = tourist.getticketStack().peek();
+			ticket.setPlayDateTime(new GregorianCalendar());
 		}
 	}
-	}
+	
     public void removeFromQueue(Tourist tourist) {
         if (tourist == null) {
         	return;

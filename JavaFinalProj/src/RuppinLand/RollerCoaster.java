@@ -9,23 +9,33 @@ int speedLevel ;
 
 	public RollerCoaster(String name, int minAge, int minHeight, int maxCapacity, int price, GregorianCalendar nextMaintenanceTime, int speedLevel) {
 	    super(name, minAge, minHeight, maxCapacity, price, nextMaintenanceTime);
-	    setSpeedLevel(speedLevel);
+		if (speedLevel < 1 || speedLevel > 3) {
+			this.speedLevel = 1;
+		}
+	    this.speedLevel = speedLevel;
 	    
 	}
 public void scene() throws Exception{
 	Scanner scanner = new Scanner(System.in);
-    System.out.println("Do you want to stay with current speed level? y/n");
+	System.out.println("Do you want to stay with current speed level? y/n");
 	String change = scanner.nextLine();
-	if (change != "y" || change != "n") {
-		throw new Exception("Wrong input");
-	} else if(change == "y") {
-		int newSpeedLevel = 0;
-		while(newSpeedLevel < 1 || newSpeedLevel >3) {
-			newSpeedLevel = scanner.nextInt();
-			System.out.println("choose level between 1 to 3");
-			System.out.println("Bad input please choose another");
-		}
-			setSpeedLevel(newSpeedLevel);
+
+	if (!change.equals("y") && !change.equals("n")) {
+	    throw new Exception("Wrong input");
+	} else if (change.equals("y")) {
+	    int newSpeedLevel = 0;
+	    while (newSpeedLevel < 1 || newSpeedLevel > 3) {
+	        System.out.println("choose level between 1 to 3");
+	        try {
+	            newSpeedLevel = Integer.parseInt(scanner.nextLine());
+	            if (newSpeedLevel < 1 || newSpeedLevel > 3) {
+	                System.out.println("Bad input please choose another");
+	            }
+	        } catch (NumberFormatException e) {
+	            System.out.println("Bad input please choose another");
+	        }
+	    }
+	    setSpeedLevel(newSpeedLevel);
 	}
 	switch (speedLevel) {
 	case 1:
@@ -55,7 +65,7 @@ public void scene() throws Exception{
 	
 }
 	public void setSpeedLevel(int speedLevel) {
-	    if (speedLevel < 1 || speedLevel > 10) {
+	    if (speedLevel < 1 || speedLevel > 3) {
 	        throw new IllegalArgumentException("Speed level must be between 1 and 10");
 	    }
 	    this.speedLevel = speedLevel;

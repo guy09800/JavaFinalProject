@@ -42,12 +42,12 @@ public class Main {
 		Main main = new Main();
 		main.setIsOpen(true);
 		// create new 6 attractions:
-		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 8));
-		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 5));
+		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 2));
+		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 3));
 		attractions.add(new FerrysWheel("Giant Wheel", 5, 100, 10, 20, new GregorianCalendar(2024, 6, 15)));
 		attractions.add(new FerrysWheel("Sky Wheel", 6, 110, 12, 25, new GregorianCalendar(2024, 8, 20)));
-		attractions.add(new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 7));
-		attractions.add(new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 9));
+		attractions.add(new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 1));
+		attractions.add(new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 2));
 		//create 3 ticket stacks for the attractions:
 		Stack<Ticket> ticketStack1 = new Stack<>();
 		Stack<Ticket> ticketStack2 = new Stack<>();
@@ -366,7 +366,6 @@ public class Main {
 					System.out.println("Error: " + e.getMessage());
 					continue;
 				}
-				System.out.println("Ride " + ride.getName() + " has been operated.");
 				try {ride.scene();}
 				catch (Exception e) {
 					System.out.println("Error: " + e.getMessage());
