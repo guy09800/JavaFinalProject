@@ -43,21 +43,21 @@ public void scene() throws Exception{
         printLine("🐢 The wheels creak as the cart starts moving.");
         printLine("🎵 Elevator music starts playing.");
         printLine("😴 A squirrel overtakes us on foot.");
-        printLine("Cart Getting back to the start line, Visitors looking bored....");
+        printLine("📱 Visitors yawn, take selfies, and check emails.");
         break;
 	case 2:
         printLine("⚡ The cart jolts forward!");
         printLine("🍟 Someone's fries fly into the air!");
         printLine("😂 Screams and laughter blend together.");
         printLine("📷 *Flash!* Your picture is now forever awkward.");
-        printLine("Cart Getting back to the start line, Visitors looking joyfull....");
+        printLine("😳 Visitors are nervously laughing and clinging to each other, Someone shouts 'IS THIS ONLY LEVEL 2?!'");
         break;
 	case 3:
         printLine("🚀 3... 2... 1... BLAST OFF!");
         printLine("💨 Air whooshes past at warp speed!");
         printLine("😱 Someone’s wig just launched into orbit!");
         printLine("🎢 Loop-de-loops at light speed commence!");
-        printLine("Cart Getting back to the start line, Visitors looking terrified....");
+        printLine("😱 Visitors are screaming, crying, and rethinking life.");
         break;
 		
 	}
