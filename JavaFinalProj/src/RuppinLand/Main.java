@@ -80,6 +80,7 @@ public class Main {
 		while (true) {
 			System.out.println("Hello Employee, Please enter your ID or 0 to exit the system:");
 			String id = scanner.nextLine();
+			if (id.equals("")) {continue;}
 			if (id.equals("0")) {
 				System.out.println("Are you sure you want to exit? (y/n)");
 				String answer = scanner.nextLine();
@@ -88,7 +89,7 @@ public class Main {
 					return;
 				} else {continue;}
 			}
-			
+
 			Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(id));
 			if (employee != null) {
 				switch (employee.getDepartment()) {
@@ -224,7 +225,7 @@ public class Main {
 					}
                     break;
                 case 10:
-                	int totalMoney = 0;
+                	int totalMoney = receptionists.getTotalMoneyMadeToday();
 					for (Ride ride : attractions) {
 						totalMoney += ride.howMuchMoneyMadeToday();
 						System.out.println("Ride: " + ride.getName() + ", Made today: " + ride.howMuchMoneyMadeToday());

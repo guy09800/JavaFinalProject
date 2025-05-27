@@ -341,5 +341,9 @@ public class Reception implements department {
 		System.out.println("=============================");
 		System.out.println("Total Tourists in Park: " + TouristInPark);
 	}
+
+	public int getTotalMoneyMadeToday() {
+		return totalMoneyToday;
+	}
 }
 
