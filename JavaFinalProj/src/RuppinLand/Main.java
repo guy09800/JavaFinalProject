@@ -1,6 +1,5 @@
 package RuppinLand;
 import java.security.PublicKey;
-import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,10 +7,8 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.Scanner;
 
-import personClass.Employee;
-import personClass.Person;
-import personClass.Tourist;
-import dataStruct.PersonTree;
+import personClass.*;
+import dataStruct.*;
 
 public class Main {
     private PersonTree employeeTree;

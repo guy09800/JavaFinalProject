@@ -1,9 +1,7 @@
 package RuppinLand;
 
-import dataStruct.PersonTree;
-import dataStruct.TreeNode;
-import personClass.Employee;
-import personClass.Tourist;
+import dataStruct.*;
+import personClass.*;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.LinkedList;

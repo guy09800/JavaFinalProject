@@ -1,9 +1,7 @@
 package RuppinLand;
 
-import dataStruct.PersonTree;
-import dataStruct.TreeNode;
-import personClass.Employee;
-import personClass.Tourist;
+import dataStruct.*;
+import personClass.*;
 
 public class Operator implements department {
 
