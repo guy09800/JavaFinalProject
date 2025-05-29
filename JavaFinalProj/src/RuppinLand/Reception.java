@@ -1,9 +1,7 @@
 package RuppinLand;
 
-import dataStruct.PersonTree;
-import dataStruct.TreeNode;
-import personClass.Employee;
-import personClass.Tourist;
+import dataStruct.*;
+import personClass.*;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.LinkedList;
@@ -340,6 +338,10 @@ public class Reception implements department {
 		}
 		System.out.println("=============================");
 		System.out.println("Total Tourists in Park: " + TouristInPark);
+	}
+
+	public int getTotalMoneyMadeToday() {
+		return totalMoneyToday;
 	}
 }
 

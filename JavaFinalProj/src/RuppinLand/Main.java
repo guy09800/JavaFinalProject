@@ -1,6 +1,5 @@
 package RuppinLand;
 import java.security.PublicKey;
-import java.time.LocalDateTime;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,16 +7,14 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.Scanner;
 
-import personClass.Employee;
-import personClass.Person;
-import personClass.Tourist;
-import dataStruct.PersonTree;
+import personClass.*;
+import dataStruct.*;
 
 public class Main {
     private PersonTree employeeTree;
-    private PersonTree visitorsTree;
+    private PersonTree touristTree;
     private boolean isOpen;
-    private static LinkedList<Ride> attractions;
+    private static Ride [] attractionArray;
     private static Scanner scanner = new Scanner(System.in);
     private Technician technicians;
     private Operator operators;
@@ -27,8 +24,8 @@ public class Main {
     
 	public Main() {
 		this.employeeTree = new PersonTree();
-		this.visitorsTree = new PersonTree();
-		this.attractions = new LinkedList<>();
+		this.touristTree = new PersonTree();
+		this.attractionArray = new Ride[0];
 		this.technicians = new Technician("Technician");
 		this.operators = new Operator("Operator");
 		this.receptionists = new Reception("Reception", 100);
@@ -42,37 +39,24 @@ public class Main {
 		Main main = new Main();
 		main.setIsOpen(true);
 		// create new 6 attractions:
-		attractions.add(new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 2));
-		attractions.add(new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 3));
-		attractions.add(new FerrysWheel("Giant Wheel", 5, 100, 10, 20, new GregorianCalendar(2024, 6, 15)));
-		attractions.add(new FerrysWheel("Sky Wheel", 6, 110, 12, 25, new GregorianCalendar(2024, 8, 20)));
-		attractions.add(new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 1));
-		attractions.add(new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 2));
-		//create 3 ticket stacks for the attractions:
-		Stack<Ticket> ticketStack1 = new Stack<>();
-		Stack<Ticket> ticketStack2 = new Stack<>();
-		Stack<Ticket> ticketStack3 = new Stack<>();
-		// add to the stack tickets:
-		ticketStack1.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack1.add(new Ticket("Sky Wheel", 20, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack1.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
-		ticketStack2.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack2.add(new Ticket("Giant Wheel", 25, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack2.add(new Ticket("Scary Mansion", 60, new GregorianCalendar(), null));
-		ticketStack3.add(new Ticket("Black Mamba", 50, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack3.add(new Ticket("Anaconda", 30, new GregorianCalendar(), new GregorianCalendar()));
-		ticketStack3.add(new Ticket("Ghost House", 40, new GregorianCalendar(), null));
+		RollerCoaster blackMamba = new RollerCoaster("Black Mamba", 10, 120, 20, 50, new GregorianCalendar(2024, 5, 1), 2);
+		RollerCoaster anaconda = new RollerCoaster("Anaconda", 7, 115, 15, 30, new GregorianCalendar(2024, 7, 7), 3);
+		FerrysWheel giantWheel = new FerrysWheel("Giant Wheel", 5, 100, 10, 20, new GregorianCalendar(2024, 6, 15));
+		FerrysWheel skyWheel = new FerrysWheel("Sky Wheel", 6, 110, 12, 25, new GregorianCalendar(2024, 8, 20));
+		HauntedHouse ghostHouse = new HauntedHouse("Ghost House", 12, 130, 25, 40, new GregorianCalendar(2024, 4, 10), 1);
+		HauntedHouse scaryMansion = new HauntedHouse("Scary Mansion", 14, 140, 30, 60, new GregorianCalendar(2024, 3, 5), 2);
+		main.attractionArray = new Ride[] {blackMamba, anaconda, giantWheel, skyWheel, ghostHouse, scaryMansion};
 		// create new 10 tourists:
-		main.visitorsTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 175).setticketStack(ticketStack1));
-		main.visitorsTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 180).setticketStack(ticketStack2));
-		main.visitorsTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 165).setticketStack(ticketStack3));
-		main.visitorsTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 170));
-		main.visitorsTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 160));
-		main.visitorsTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 185));
-		main.visitorsTree.addPerson(new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 155));
-		main.visitorsTree.addPerson(new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 190));
-		main.visitorsTree.addPerson(new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 185));
-		main.visitorsTree.addPerson(new Tourist("318265378", "Idan", new GregorianCalendar(1997, 10, 3), 105));
+		main.touristTree.addPerson(new Tourist("1", "Alice", new GregorianCalendar(2000, 1, 1), 175));
+		main.touristTree.addPerson(new Tourist("2", "Bob", new GregorianCalendar(1995, 2, 2), 180));
+		main.touristTree.addPerson(new Tourist("3", "Charlie", new GregorianCalendar(1990, 3, 3), 165));
+		main.touristTree.addPerson(new Tourist("4", "David", new GregorianCalendar(1985, 4, 4), 170));
+		main.touristTree.addPerson(new Tourist("5", "Eve", new GregorianCalendar(1980, 5, 5), 160));
+		main.touristTree.addPerson(new Tourist("6", "Frank", new GregorianCalendar(1975, 6, 6), 185));
+		main.touristTree.addPerson(new Tourist("7", "Grace", new GregorianCalendar(1970, 7, 7), 155));
+		main.touristTree.addPerson(new Tourist("8", "Heidi", new GregorianCalendar(1965, 8, 8), 190));
+		main.touristTree.addPerson(new Tourist("9", "Ivan", new GregorianCalendar(1960, 9, 9), 185));
+		main.touristTree.addPerson(new Tourist("318265378", "Idan", new GregorianCalendar(1997, 10, 3), 105));
 		// create 10 employees:
 		main.employeeTree.addPerson(new Employee("11", "Kathy", new GregorianCalendar(1990, 1, 1), "Management", 100));
 		main.employeeTree.addPerson(new Employee("12", "Leo", new GregorianCalendar(1985, 2, 2), "Reception", 80));
@@ -92,8 +76,10 @@ public class Main {
 	
 	public void mainMenu () {
 		while (true) {
+			System.out.println("=======================================");
 			System.out.println("Hello Employee, Please enter your ID or 0 to exit the system:");
 			String id = scanner.nextLine();
+			if (id.equals("")) {continue;}
 			if (id.equals("0")) {
 				System.out.println("Are you sure you want to exit? (y/n)");
 				String answer = scanner.nextLine();
@@ -102,7 +88,7 @@ public class Main {
 					return;
 				} else {continue;}
 			}
-			
+
 			Employee employee = (Employee) employeeTree.searchPerson(Integer.parseInt(id));
 			if (employee != null) {
 				switch (employee.getDepartment()) {
@@ -125,67 +111,84 @@ public class Main {
 				System.out.println("Employee not found.");
 			}
 		}
+		
 	}
 
 	public void ManagementMenu(Employee employee) {
 		System.out.println("Welcome " + employee.getName() + "!");
 		while (true) {
             System.out.println(
+            		"=======================================================================\n"+
                     "1. Add new ride\t\t\t\t\t7. Print all employees\n" +
                     "2. Remove ride\t\t\t\t\t8. Print all tourists\n" +
                     "3. Add new employee\t\t\t\t9. Move employee to another department\n" +
                     "4. Remove employee\t\t\t\t10. How much money the park made today\n" +
                     "5. Print all rides\t\t\t\t11. Show Stats\n" +
-                    "6. Print all tourists in the park now\n12. Exit\n"
+                    "6. Print all tourists in the park now\n12. Exit\n"+
+                    "=======================================================================\n"
                 );
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
                 case 1:
-                    System.out.println("Please enter the ride name:");
-                    String rideName = scanner.nextLine();
-                    System.out.println("Please enter the ride type (RollerCoaster, FerrysWheel, HauntedHouse):");
-                    String rideType = scanner.nextLine();
-                    System.out.println("Please enter the minimum age:");
-                    int minAge = scanner.nextInt();
-                    System.out.println("Please enter the minimum height:");
-                    int minHeight = scanner.nextInt();
-                    System.out.println("Please enter the max capacity:");
-                    int maxCapacity = scanner.nextInt();
-                    System.out.println("Please enter the price:");
-                    int price = scanner.nextInt();
-                    scanner.nextLine();
-                    GregorianCalendar nextMaintenanceTime = new GregorianCalendar();
-                    nextMaintenanceTime.add(GregorianCalendar.MONTH, 1);
-					switch (rideType) {
-					case "RollerCoaster":
-						System.out.println("Please enter the speed:");
-						int speed = scanner.nextInt();
-						attractions.add(new RollerCoaster(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime, speed));
-						break;
-					case "FerrysWheel":
-						attractions.add(new FerrysWheel(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime));
-						break;
-					case "HauntedHouse":
-						System.out.println("Please enter the scare level:");
-						int scareLevel = scanner.nextInt();
-						attractions.add(new HauntedHouse(rideName, minAge, minHeight, maxCapacity,price, nextMaintenanceTime, scareLevel));
-						break;
-					default:
-						System.out.println("Invalid ride type.");
-					}
+                	System.out.println("Please enter the ride name:");
+                	String rideName = scanner.nextLine();
+                	System.out.println("Please enter the ride type (RollerCoaster, FerrysWheel, HauntedHouse):");
+                	String rideType = scanner.nextLine();
+                	System.out.println("Please enter the minimum age:");
+                	int minAge = scanner.nextInt();
+                	System.out.println("Please enter the minimum height:");
+                	int minHeight = scanner.nextInt();
+                	System.out.println("Please enter the max capacity:");
+                	int maxCapacity = scanner.nextInt();
+                	System.out.println("Please enter the price:");
+                	int price = scanner.nextInt();
+                	scanner.nextLine(); // clean newline
+
+                	GregorianCalendar nextMaintenanceTime = new GregorianCalendar();
+                	nextMaintenanceTime.add(GregorianCalendar.MONTH, 1);
+
+                	Ride newRide = null;
+
+                	switch (rideType) {
+                	    case "RollerCoaster":
+                	        System.out.println("Please enter the speed:");
+                	        int speed = scanner.nextInt();
+                	        newRide = new RollerCoaster(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime, speed);
+                	        break;
+                	    case "FerrysWheel":
+                	        newRide = new FerrysWheel(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime);
+                	        break;
+                	    case "HauntedHouse":
+                	        System.out.println("Please enter the scare level:");
+                	        int scareLevel = scanner.nextInt();
+                	        newRide = new HauntedHouse(rideName, minAge, minHeight, maxCapacity, price, nextMaintenanceTime, scareLevel);
+                	        break;
+                	    default:
+                	        System.out.println("Invalid ride type.");
+                	}
+
+                	if (newRide != null) {
+                	    Ride[] newArray = new Ride[attractionArray.length + 1];
+                	    System.arraycopy(attractionArray, 0, newArray, 0, attractionArray.length);
+                	    newArray[newArray.length - 1] = newRide;
+                	    attractionArray = newArray;
+                	    System.out.println("Ride " + rideName + " added.");
+                	}
                     break;
                 case 2:
                 	System.out.println("Please enter the ride name to remove:");
                 	String removeRideName = getRideFromUser().getName();
-                	for (Ride ride : attractions) {
-						if (ride.getName().equals(removeRideName)) {
-							ride.setOpen(false);
-							attractions.remove(ride);
-							System.out.println("Ride " + removeRideName + " has been removed.");
-							break;
-						}
-                	}
+                	for (int i = 0; i < attractionArray.length; i++) {
+                        if (attractionArray[i].getName().equals(removeRideName)) {
+                            Ride[] newAttractions = new Ride[attractionArray.length - 1];
+                            System.arraycopy(attractionArray, 0, newAttractions, 0, i);
+                            System.arraycopy(attractionArray, i + 1, newAttractions, i, attractionArray.length - i - 1);
+                            attractionArray = newAttractions;
+                            System.out.println("Ride " + removeRideName + " removed.");
+                            break;
+                        }
+                    }
                     break;
                 case 3:
                 	Employee newEmployee = Employee.createEmployee(employeeTree);
@@ -208,7 +211,7 @@ public class Main {
                     break;
                 case 8: 
                 	System.out.println("Tourists:");
-                	visitorsTree.printAll();
+                	touristTree.printAll();
                     break;
                 case 9:
                     System.out.println("Please enter the employee ID to move:");
@@ -238,8 +241,8 @@ public class Main {
 					}
                     break;
                 case 10:
-                	int totalMoney = 0;
-					for (Ride ride : attractions) {
+                	int totalMoney = receptionists.getTotalMoneyMadeToday();
+					for (Ride ride : attractionArray) {
 						totalMoney += ride.howMuchMoneyMadeToday();
 						System.out.println("Ride: " + ride.getName() + ", Made today: " + ride.howMuchMoneyMadeToday());
 					}
@@ -266,10 +269,12 @@ public class Main {
 			while(true)
 			{
 				System.out.println(
+						"=======================================================================\n"+
 					    "1. Open ride\t4. Get ride details\n" +
 					    "2. Close ride\t5. Get complaint from tourist\n" +
 					    "3. Fix ride\t6. Print All Rides next maintenance time\n" +
-					    "7. Exit"
+					    "7. Exit\n"+
+					    "=======================================================================\n"
 					);
 				
                 int choice = scanner.nextInt();
@@ -316,7 +321,7 @@ public class Main {
 				    break;
 				case 6:
 					System.out.println("Rides next maintenance times:");
-					for (Ride r : attractions) {
+					for (Ride r : attractionArray) {
 						System.out.println("Ride: " + r.getName() + ", Next Maintenance Time: " + r.getNextMaintenanceTime().getTime());
 					}
 				    break;
@@ -337,10 +342,12 @@ public class Main {
 		while(true)
 		{
 			System.out.println(
+					"=======================================================================\n"+
 				    "1. Sell ticket\t\t\t\t\t5. Open ride\n" +
 				    "2. Move the queue and start the attraction\t6. Get ride details\n" +
 				    "3. Get out person from the queue\t\t7. Print all tourists in the queue\n" +
-				    "4. Close ride\t\t\t\t\t8. Exit"
+				    "4. Close ride\t\t\t\t\t8. Exit\n"+
+				    "=======================================================================\n"
 				);
 			int choice = scanner.nextInt();
 			scanner.nextLine();
@@ -357,7 +364,6 @@ public class Main {
 					System.out.println("Error: " + e.getMessage());
 					continue;
 					}
-
 				break;
 			case 2:
 				try {
@@ -407,17 +413,19 @@ public class Main {
 		
 		while (true) {
 			System.out.println(
+					"=======================================================================\n"+
 				    "Please choose an option:\n" +
 				    "1. Sell ticket\t\t\t4. Print all tourists in the park now\n" +
 				    "2. Give parking ticket\t\t5. Exit\n" +
-				    "3. Print parking lot"
+				    "3. Print parking lot\n"+
+				    "=======================================================================\n"
 				);
             int choice = scanner.nextInt();
 			scanner.nextLine();
 			switch (choice) {
 			case 1:
 				Tourist tourist = getTouristFromUser();
-				if (tourist == null) {tourist = receptionists.registerTourist(visitorsTree);}
+				if (tourist == null) {tourist = receptionists.registerTourist(touristTree);}
 				receptionists.sellTicket(tourist);
 				break;
 			case 2:
@@ -450,7 +458,7 @@ public class Main {
 	private Tourist getTouristFromUser() {
 		System.out.println("Please enter the tourist ID:");
 		String touristId = scanner.nextLine();
-		Tourist tourist = (Tourist) visitorsTree.searchPerson(Integer.parseInt(touristId));
+		Tourist tourist = (Tourist) touristTree.searchPerson(Integer.parseInt(touristId));
 		if (tourist == null) {
 			System.out.println("Tourist not found.");
 			return null;
@@ -460,7 +468,7 @@ public class Main {
 
 	private void printAttractions() {
 		System.out.println("Attractions:");
-		for (Ride ride : attractions) {
+		for (Ride ride : attractionArray) {
 			System.out.println(ride.getName());
 		}
 	}
@@ -469,7 +477,7 @@ public class Main {
 		printAttractions();
 		System.out.println("Please enter the ride name:");
 		String rideName = scanner.nextLine();
-		for (Ride ride : attractions) {
+		for (Ride ride : attractionArray) {
 			if (ride.getName().equals(rideName)) {
 				return ride;
 			}
@@ -500,11 +508,11 @@ public class Main {
 	}
 	private void showStats() {
         System.out.println("==========================================================");
-		System.out.println("Number of rides: " + attractions.size());
-		System.out.println("Number of tourists in the system: " + visitorsTree.getSize());
+		System.out.println("Number of rides: " + attractionArray.length);
+		System.out.println("Number of tourists in the system: " + touristTree.getSize());
 		System.out.println("Number of employees in the system: " + employeeTree.getSize());
 		System.out.println("Money made today by each ride:");
-		for (Ride ride : attractions) {
+		for (Ride ride : attractionArray) {
 			System.out.println(ride.getName() + ": " + ride.howMuchMoneyMadeToday());
 		}
 		System.out.println("==========================================================");
