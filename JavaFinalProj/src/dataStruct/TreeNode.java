@@ -12,12 +12,14 @@ public class TreeNode {
 		this.left = null;
 		this.right = null;
 	}
-
+	//Getters:
 	public Person getPerson() {return person;}
-	public void setPerson(Person person) {this.person = person;}
 	public TreeNode getLeft() {return left;}
-	public void setLeft(TreeNode left) {this.left = left;}
 	public TreeNode getRight() {return right;}
+	//Setters:
+	public void setPerson(Person person) {this.person = person;}
+	public void setLeft(TreeNode left) {this.left = left;}
 	public void setRight(TreeNode right) {this.right = right;}
+	//Other methods:
 	public boolean isLeaf() {return left == null && right == null;}
 }

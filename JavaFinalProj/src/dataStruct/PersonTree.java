@@ -3,13 +3,24 @@ import personClass.Employee;
 import personClass.Person;
 
 public class PersonTree {
-	TreeNode root;
+	private TreeNode root;
 
 	public PersonTree() {this.root = null;}
-	public TreeNode getRoot() {return root;}
-	public Person searchPerson(int id) {return searchPersonRec(root, id);}
-	public void printAll() {printAllPerson(root);}
 	
+	//Getters:
+	public TreeNode getRoot() {
+		return root;
+	}
+	public int getSize() {
+		return getSizeRec(root);
+}
+	private int getSizeRec(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		return 1 + getSizeRec(node.getLeft()) + getSizeRec(node.getRight());
+	}
+	//Other methods:
 	public void addPerson(Person person) {
 		if (person == null) {
 			throw new IllegalArgumentException("Person cannot be null");
@@ -69,9 +80,7 @@ public class PersonTree {
 	private void printByDepartmentRec(TreeNode node, String departmentName, boolean OneLine) { 
 	    
 		if (node == null) return;
-
 	    printByDepartmentRec(node.getLeft(), departmentName, OneLine);
-
 	    Employee employee = (Employee) node.getPerson(); // Safe cast since tree has only Employees
 	    
 	    if (employee.getDepartment().equalsIgnoreCase(departmentName)) {
@@ -82,7 +91,6 @@ public class PersonTree {
 	    		employee.printDetails(); 
 	    	}
 	    }
-
 	    printByDepartmentRec(node.getRight(), departmentName, OneLine);
 	}
 
@@ -129,16 +137,11 @@ public class PersonTree {
 		}
 		return right;
 	}
-
-	public int getSize() {
-		return getSizeRec(root);
+	public Person searchPerson(int id) {
+		return searchPersonRec(root, id);
 	}
-
-	private int getSizeRec(TreeNode node) {
-		if (node == null) {
-			return 0;
-		}
-		return 1 + getSizeRec(node.getLeft()) + getSizeRec(node.getRight());
+	public void printAll() {
+		printAllPerson(root);
 	}
 }
 

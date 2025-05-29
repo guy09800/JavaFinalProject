@@ -28,6 +28,21 @@ public final class Ticket { // Final Class unless we want to inherit from this c
         this.buyDateTime = buyDateTime;
         this.playDateTime = new GregorianCalendar(9999, Calendar.DECEMBER, 31);// a far year so until the play time it would be valid
     }
+
+	public Ticket(Tourist tourist, Ride ride, GregorianCalendar buyDateTime) {
+		if (tourist == null || ride == null) {
+			throw new IllegalArgumentException("Tourist and Ride cannot be null.");
+		}
+		if (buyDateTime == null) {
+			throw new IllegalArgumentException("Buy date/time cannot be null.");
+		}
+
+		this.rideName = ride.getName();
+		this.price = ride.getPrice();
+		this.buyDateTime = buyDateTime;
+		this.playDateTime = new GregorianCalendar(9999, Calendar.DECEMBER, 31);
+																			
+	}
     
  // Copy Constructor:
     public Ticket(Ticket other) {
